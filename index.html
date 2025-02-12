@@ -1,7 +1,19 @@
 <!DOCTYPE html>
 <head>
   <title>Every website on .is-a.dev</title>
-  <script src="fetch.js"></script>
+  <script>
+    fetch('https://raw-api.is-a.dev/')
+      .then(response => response.json())
+      .then(data => {
+        const list = document.getElementById('list');
+        data.forEach(item => {
+          const listItem = document.createElement('li');
+          listItem.innerHTML = `<span><a target="_blank" href="http://${item.domain}">${item.description || item.domain}</a> - by <a target="_blank" href="https://github.com/${item.owner.username}">${item.owner.username}</a></span>`;
+          list.appendChild(listItem);
+        });
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  </script>
 </head>
 <body>
   <h1>Every website on .is-a.dev</h1>
