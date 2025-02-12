@@ -95,6 +95,7 @@
     }
     #spotlight {
       filter: drop-shadow(0px 0px 6px #6e3bf377);
+      -webkit-filter: drop-shadow(0px 0px 6px #6e3bf377);
       padding-top: 5px;
       padding-bottom: 7px;
       border-radius: 5px;
@@ -107,11 +108,37 @@
       left: 3px;
       position: relative;
     }
+    .DISCLAIMER {
+      margin: 10px !important;
+      margin-left: 0px !important;
+      padding-left: 4px;
+      border-left: 4px solid #6e3bf3;
+      width: auto;
+      border-bottom-right-radius: 20px;
+      border-top-right-radius: 20px;
+      filter: drop-shadow(-2px 0px 15px #251257);
+      -webkit-filter: drop-shadow(-2px 0px 15px #251257);
+    }
+    .DISCLAIMER, .DISCLAIMER * {
+      background-color: #251257;
+      margin: 0px;
+      padding: 5px;
+    }
+    .DISCLAIMER a {
+      padding: 2px;
+      background-color: #1d1041;
+      border-radius: 5px;
+      color: #b49fed !important;
+    }
   </style>
 </head>
 <body>
   <h1>Every website on .is-a.dev</h1>
   <img alt="Domains Count" src="https://img.shields.io/github/directory-file-count/is-a-dev/register/domains?color=5c46eb&label=domains&style=for-the-badge">
+  <div class="DISCLAIMER">
+    <h1>DISCLAIMER</h1>
+    <p>This website is <strong style="text-decoration: underline; padding: 0px !important;">NOT</strong> claiming to be an official website/subdomain of is-a.dev. This is just a visualized version of <a href="https://raw-api.is-a.dev/" target="_blank">raw-api.is-a.dev</a>.</p>
+  </div>
   <p>Official Subdomains <small>(Check <a href="https://docs.is-a.dev/" target="_blank" title="is-a.dev documentation">https://docs.is-a.dev/</a>)</small></p>
   <ul id="main"></ul>
   <p>Subdomains</p>
