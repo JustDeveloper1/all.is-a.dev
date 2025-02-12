@@ -51,6 +51,28 @@
         await new Promise(resolve => setTimeout(resolve, 100));
       }
     };
+
+    function isOfficial(domain) {
+      const offs = [
+        '@.is-a.dev',
+        'data.is-a.dev',
+        'docs.is-a.dev',
+        'owl.is-a.dev',
+        'raw-api.is-a.dev',
+        'register-bot.is-a.dev',
+        'team.is-a.dev',
+        'www.is-a.dev'
+      ];
+      return (offs.some(off => off === domain))
+    }
+
+    function isSys(domain) {
+      const prefix = [
+        '_',
+        'zmail._domainkey'
+      ]
+      return (prefix.some(pfx => domain.startsWith(pfx)))
+    }
     
     try {
       fetch('https://raw-api.is-a.dev/')
@@ -83,28 +105,45 @@
                 listItem.innerHTML = `<span id="spotlight"><div class="subdomain-link" id="subdomain-${dmnID}" title="${desc}">${desc}</div><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
               }
 
-              if (domain.startsWith('@') || domain === "data.is-a.dev" || domain === "docs.is-a.dev" || domain === "owl.is-a.dev" || domain === "raw-api.is-a.dev" || domain === "register-bot.is-a.dev" || domain === "team.is-a.dev" || domain === "www.is-a.dev") {
-                if (domain.startsWith('@')) {
+              if (isOfficial(domain)) {
+                if (domain === "@.is-a.dev") {
                   domain = domain.replace('@.', '');
                   listItem.innerHTML = `<span><div class="subdomain-link" target="_blank" title="${desc}">The root domain (is-a.dev)</div><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
                 }
                 list3.appendChild(listItem);
-              } else if (domain.startsWith('_') || domain.startsWith('zmail._domainkey')) {
+              } else if (isSys(domain)) {
                 list2.appendChild(listItem);
               } else {
                 list1.appendChild(listItem);
               }
 
-              document.getElementById(`subdomain-${dmnID}`).addEventListener("click", () => {
-                document.body.innerHTML += redirectWarning(domain, `agree-${dmnID}`, `close-${dmnID}`);
-                document.getElementById(`agree-${dmnID}`).addEventListener("click", () => {
-                  window.open(link, "_blank");
-                  window.location.reload();
+              try {
+                document.getElementById(`subdomain-${dmnID}`).addEventListener("click", () => {
+                  document.body.innerHTML += redirectWarning(domain, `agree-${dmnID}`, `close-${dmnID}`);
+                  document.getElementById(`agree-${dmnID}`).addEventListener("click", () => {
+                    window.open(link, "_blank");
+                    window.location.reload();
+                  });
+                  document.getElementById(`close-${dmnID}`).addEventListener("click", () => {
+                    window.location.reload();
+                  });
                 });
-                document.getElementById(`close-${dmnID}`).addEventListener("click", () => {
-                  window.location.reload();
-                });
-              });
+              } catch {
+                if (isOfficial(domain)) {
+                  list3.removeChild(listItem);
+                } else if (isSys(domain)) {
+                  list2.removeChild(listItem);
+                } else {
+                  list1.removeChild(listItem);
+                }
+                let newList = document.getElementById('errors');
+                if (!newList) {
+                  newList = document.createElement('ul');
+                  newList.style.display = 'none';
+                  newList.id = 'errors';
+                }
+                newList.appendChild(listItem);
+              }
             });
           });
         })
