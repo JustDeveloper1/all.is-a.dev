@@ -70,16 +70,20 @@
             } else {
               list1.appendChild(listItem);
             }
-            document.getElementById(`subdomain-${dmnID}`).addEventListener("click", () => {
-              document.body.appendChild(redirectWarning(domain, `agree-${dmnID}`, `close-${dmnID}`));
-              document.getElementById(`agree-${dmnID}`).addEventListener("click", () => {
-                window.open(link, "_blank");
-                window.location.reload();
+            setTimeout(() => {
+              document.getElementById(`subdomain-${dmnID}`).addEventListener("click", () => {
+                document.body.appendChild(redirectWarning(domain, `agree-${dmnID}`, `close-${dmnID}`));
+                setTimeout(() => {
+                  document.getElementById(`agree-${dmnID}`).addEventListener("click", () => {
+                    window.open(link, "_blank");
+                    window.location.reload();
+                  });
+                  document.getElementById(`close-${dmnID}`).addEventListener("click", () => {
+                    window.location.reload();
+                  });
+                }, 100);
               });
-              document.getElementById(`close-${dmnID}`).addEventListener("click", () => {
-                window.location.reload();
-              });
-            });
+            }, 100)
           });
         })
         .catch(error => throwNewError(`Error fetching data: ${error}`));
