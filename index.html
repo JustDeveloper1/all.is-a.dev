@@ -18,11 +18,11 @@
               .replaceAll('%20', ' ')
               .replaceAll('%40', '@')
               .replace(/%\w\w/g, "");
-            listItem.innerHTML = `<span><a target="_blank" href="http://${domain}">${desc}</a><info> by <a target="_blank" href="https://github.com/${namelink}">${name}</a></info></span>`;
+            listItem.innerHTML = `<span><a target="_blank" href="http://${domain}" title="${desc}">${desc}</a><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
             if (domain.startsWith('@') || domain == "data.is-a.dev" || domain == "docs.is-a.dev" || domain == "owl.is-a.dev" || domain == "raw-api.is-a.dev" || domain == "register-bot.is-a.dev" || domain == "team.is-a.dev"  || domain == "www.is-a.dev") {
               if (domain.startsWith('@')) {
                 domain = domain.replace('@.', '');
-                listItem.innerHTML = `<span><a target="_blank" href="http://${domain}">The root domain (is-a.dev)</a><info> by <a target="_blank" href="https://github.com/${namelink}">${name}</a></info></span>`;
+                listItem.innerHTML = `<span><a target="_blank" href="http://${domain}" title="${desc}">The root domain (is-a.dev)</a><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
               }
               list3.appendChild(listItem);
             } else if (domain.startsWith('_') || domain.startsWith('zmail._domainkey')) {
@@ -40,8 +40,8 @@
   <style>
     body, body * {
       font-family: monospace;
-      background-color: black;
-      color: white;
+      background-color: #161616;
+      color: #ededed;
     }
     a {
       color: #6e3bf3 !important;
@@ -54,13 +54,38 @@
       align-content: center;
       align-items: center;
       width: 100%;
+      border-bottom: 1px solid #6e2bf34f;
+    }
+    ::marker {
+      color: #555555;
+    }
+    ::-moz-selection {
+      color: #fff;
+      background: #6e3bf3
+    }
+    ::selection {
+      color: #fff;
+      background: #6e3bf3
+    }
+    ::-webkit-scrollbar {
+        height: .625rem;
+        width: .625rem
+    }
+    ::-webkit-scrollbar-track {
+        background-color: transparent
+    }
+    ::-webkit-scrollbar-thumb {
+        border-radius: 9999px;
+        border: 1px solid transparent;
+        background-color: #6e3bf3;
+        background-clip: padding-box
     }
   </style>
 </head>
 <body>
   <h1>Every website on .is-a.dev</h1>
   <img alt="Domains Count" src="https://img.shields.io/github/directory-file-count/is-a-dev/register/domains?color=5c46eb&label=domains&style=for-the-badge">
-  <p>Official Subdomains <small>(Check <a href="https://docs.is-a.dev/" target="_blank">https://docs.is-a.dev/</a>)</small></p>
+  <p>Official Subdomains <small>(Check <a href="https://docs.is-a.dev/" target="_blank" title="is-a.dev documentation">https://docs.is-a.dev/</a>)</small></p>
   <ul id="main"></ul>
   <p>Subdomains</p>
   <ul id="list"></ul>
