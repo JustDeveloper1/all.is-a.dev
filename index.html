@@ -6,11 +6,25 @@
       fetch('https://raw-api.is-a.dev/')
         .then(response => response.json())
         .then(data => {
-          const list = document.getElementById('list');
+          const list1 = document.getElementById('list');
+          const list2 = document.getElementById('list-sys');
+          const list3 = document.getElementById('main');
           data.forEach(item => {
             const listItem = document.createElement('li');
-            listItem.innerHTML = `<span><a target="_blank" href="http://${item.domain}">${item.description || item.domain}</a> - by <a target="_blank" href="https://github.com/${item.owner.username}">${item.owner.username}</a></span>`;
-            list.appendChild(listItem);
+            let domain = `${item.domain}`
+            const name = `${item.owner.username}`;
+            const namelink = name.toLowerCase();
+            const desc = encodeURIComponent(`${item.description || domain}`);
+            listItem.innerHTML = `<span><a target="_blank" href="http://${domain}">${desc}</a><info> - by <a target="_blank" href="https://github.com/${namelink}">${name}</a></info></span>`;
+            if (domain.startsWith('@') || domain == "data.is-a.dev" || domain == "docs.is-a.dev" || domain == "owl.is-a.dev" || domain == "raw-api.is-a.dev" || domain == "register-bot.is-a.dev" || domain == "team.is-a.dev"  || domain == "www.is-a.dev") {
+              domain = domain.replace('@.', '');
+              listItem.innerHTML = `<span><a target="_blank" href="http://${domain}">The root domain (is-a.dev)</a><info> - by <a target="_blank" href="https://github.com/${namelink}">${name}</a></info></span>`;
+              list3.appendChild(listItem);
+            } else if (domain.startsWith('_') || domain.startsWith('zmail._domainkey')) {
+              list2.appendChild(listItem);
+            } else {
+              list1.appendChild(listItem);
+            }
           });
         })
         .catch(error => console.error('Error fetching data:', error));
@@ -27,10 +41,24 @@
     a {
       color: #6e3bf3 !important;
     }
+    span {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      align-content: center;
+      align-items: center;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
   <h1>Every website on .is-a.dev</h1>
   <img alt="Domains" src="https://img.shields.io/github/directory-file-count/is-a-dev/register/domains?color=5c46eb&label=domains&style=for-the-badge">
+  <p>Official Subdomains <small>(Check <a href="https://docs.is-a.dev/" target="_blank">https://docs.is-a.dev/</a>)</small></p>
+  <ul id="main"></ul>
+  <p>Subdomains</p>
   <ul id="list"></ul>
+  <p>Subdomains that are most likely made for verifications</p>
+  <ul id="list-sys"></ul>
 </body>
