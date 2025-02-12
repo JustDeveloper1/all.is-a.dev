@@ -158,8 +158,10 @@
       background-color: #161616;
       color: #ededed;
     }
-    a {
+    a, .subdomain-link {
       color: #6e3bf3 !important;
+      text-decoration: underline;
+      background-color: transparent !important;
     }
     span {
       display: flex;
@@ -324,14 +326,14 @@
       padding-right: 10px;
       cursor: pointer;
     }
-    .WARNING button:hover, a:hover {
+    .WARNING button:hover, a:hover, subdomain-link:hover {
       filter: drop-shadow(0px 0px 6px #6e3bf3);
       -webkit-filter: drop-shadow(0px 0px 6px #6e3bf3);
     }
     body:has(.WARNING) {
       overflow: hidden;
     }
-    .WARNING button, a {
+    .WARNING button, a, .subdomain-link {
       transition: 500ms;
     }
   </style>
