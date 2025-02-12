@@ -4,14 +4,37 @@
   <script>
     const spotlight = [
       
+      // to be spotlighted...
+      
+    ];
+    const js_subdomains = [
+      
       "juststudio.is-a.dev",
+      
       "justdeveloper.is-a.dev",
+      
+    ]
+    const js_partners = [
       
       "kappy.is-a.dev",
       
       "playreaver.is-a.dev",
       
-    ];
+    ]
+    const maintainers = [
+
+      "cutedog5695.is-a.dev",
+      "iostpa.is-a.dev",
+      
+      "orangc.is-a.dev",
+
+      "stefdp.is-a.dev",
+
+      "william.is-a.dev",
+
+      "21z.is-a.dev"
+      
+    ]
     
     function truncateString(str, num) {
       return str.length > num ? str.slice(0, num) : str;
@@ -73,6 +96,10 @@
       ]
       return (prefix.some(pfx => domain.startsWith(pfx)))
     }
+
+    function toBeSpotlighted(domain) {
+      return (spotlight.some(thing => thing === domain) || js_subdomains.some(subdomain => subdomain === domain) || js_partners.some(partner => partner === domain) || maintainers.some(one => one === domain))
+    }
     
     try {
       fetch('https://raw-api.is-a.dev/')
@@ -101,7 +128,7 @@
               const link = `http://${domain}`;
               listItem.innerHTML = `<span><div class="subdomain-link" id="subdomain-${dmnID}" title="${desc}">${truncateString2(desc, 50)}</div><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
               
-              if (spotlight.some(light => light === domain)) {
+              if (toBeSpotlighted(domain)) {
                 listItem.innerHTML = `<span id="spotlight"><div class="subdomain-link" id="subdomain-${dmnID}" title="${desc}">${desc}</div><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
               }
 
