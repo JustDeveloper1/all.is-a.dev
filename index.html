@@ -130,11 +130,11 @@
                 });
               } catch {
                 if (isOfficial(domain)) {
-                  list3.removeChild(listItem);
+                  try {list3.removeChild(listItem);} catch {}
                 } else if (isSys(domain)) {
-                  list2.removeChild(listItem);
+                  try {list2.removeChild(listItem);} catch {}
                 } else {
-                  list1.removeChild(listItem);
+                  try {list1.removeChild(listItem);} catch {}
                 }
                 let newList = document.getElementById('errors');
                 if (!newList) {
