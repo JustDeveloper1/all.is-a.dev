@@ -12,6 +12,16 @@
       "playreaver.is-a.dev",
       
     ]
+    function truncateString(str, num) {
+      return str.length > num ? str.slice(0, num) : str;
+    }
+    function truncateString2(str, num) {
+      let output__ = truncateString(str, num-3);
+      if (str !== output__) {
+        output__ += "...";
+      }
+      return output__;
+    }
     try {
       fetch('https://raw-api.is-a.dev/')
         .then(response => response.json())
@@ -28,7 +38,7 @@
               .replaceAll('%20', ' ')
               .replaceAll('%40', '@')
               .replace(/%\w\w/g, "");
-            listItem.innerHTML = `<span><a target="_blank" href="http://${domain}" title="${desc}">${desc}</a><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
+            listItem.innerHTML = `<span><a target="_blank" href="http://${domain}" title="${desc}">${truncateString2(desc, 100)}</a><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
             if (spotlight.some((light) => {return light == domain})) {
               listItem.innerHTML = `<span id="spotlight"><a target="_blank" href="http://${domain}" title="${desc}">${desc}</a><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
             }
@@ -129,6 +139,15 @@
       background-color: #1d1041;
       border-radius: 5px;
       color: #b49fed !important;
+    }
+    info {
+      display: flex;
+      gap: 5px;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
     }
   </style>
 </head>
