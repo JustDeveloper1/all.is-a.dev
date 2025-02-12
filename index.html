@@ -241,6 +241,99 @@
       justify-content: center;
       align-items: center;
     }
+    .WARNING {
+      position: fixed;
+      z-index: 2;
+      top: 15px;
+      left: 15px;
+      padding: 30px;
+      width: calc(100% - 90px);
+      height: calc(100% - 90px);
+      background-color: transparent;
+    }
+    .WARNING:before {
+      content: '';
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background-color: #16161699;
+      top: 0%;
+      left: 0%;
+      z-index: -2;
+      backdrop-filter: blur(8px) brightness(50%);
+      -webkit-backdrop-filter: blur(8px) brightness(50%);
+    }
+    .WARNING * {
+      background-color: transparent;
+    }
+    .WARNING h1 {
+      color: #6e3bf3;
+      filter: 
+              drop-shadow(1px 1px #6e3bf3) drop-shadow(1px 0px #fafafa)
+              drop-shadow(-1px -1px #6e3bf360) drop-shadow(-1px 0px #fafafa)
+              drop-shadow(-1px 1px #fafafa) drop-shadow(0px 1px #fafafa)
+              drop-shadow(1px -1px #fafafa) drop-shadow(0px -1px #fafafa)
+          
+              drop-shadow(1px 1px #6e3bf3) drop-shadow(1px 0px #1d1d1d)
+              drop-shadow(-1px -1px #6e3bf360) drop-shadow(-1px 0px #1d1d1d)
+              drop-shadow(-1px 1px #1d1d1d) drop-shadow(0px 1px #1d1d1d)
+              drop-shadow(1px -1px #1d1d1d) drop-shadow(0px -1px #1d1d1d);
+      -webkit-filter: 
+              drop-shadow(1px 1px #6e3bf3) drop-shadow(1px 0px #fafafa)
+              drop-shadow(-1px -1px #6e3bf360) drop-shadow(-1px 0px #fafafa)
+              drop-shadow(-1px 1px #fafafa) drop-shadow(0px 1px #fafafa)
+              drop-shadow(1px -1px #fafafa) drop-shadow(0px -1px #fafafa)
+          
+              drop-shadow(1px 1px #6e3bf3) drop-shadow(1px 0px #1d1d1d)
+              drop-shadow(-1px -1px #6e3bf360) drop-shadow(-1px 0px #1d1d1d)
+              drop-shadow(-1px 1px #1d1d1d) drop-shadow(0px 1px #1d1d1d)
+              drop-shadow(1px -1px #1d1d1d) drop-shadow(0px -1px #1d1d1d);
+      font-size: xxx-large;
+      font-weight: 900;
+      pointer-events: none;
+      user-select: none;
+    }
+    .WARNING span {
+      display: block;
+      font-weight: 900;
+      font-size: 18px;
+      text-align: center;
+      background-color: #00000040 !important;
+      border-radius: 10px;
+      border-bottom-width: 3px;
+    }
+    .WARNING main {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: calc(100% - 90px);
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-content: center;
+      justify-content: space-between;
+      align-items: center;
+      gap: 5px;
+    }
+    .WARNING button {
+      background-color: #6e3bf3bd;
+      border: 2px solid #fefefebd;
+      border-radius: 50px;
+      padding: 5px;
+      padding-left: 10px;
+      padding-right: 10px;
+      cursor: pointer;
+    }
+    .WARNING button:hover, a:hover {
+      filter: drop-shadow(0px 0px 6px #6e3bf3);
+      -webkit-filter: drop-shadow(0px 0px 6px #6e3bf3);
+    }
+    body:has(.WARNING) {
+      overflow: hidden;
+    }
+    .WARNING button, a {
+      transition: 500ms;
+    }
   </style>
 </head>
 <body>
