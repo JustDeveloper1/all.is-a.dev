@@ -29,7 +29,7 @@
               .replaceAll('%40', '@')
               .replace(/%\w\w/g, "");
             listItem.innerHTML = `<span><a target="_blank" href="http://${domain}" title="${desc}">${desc}</a><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
-            if spotlight.some((light) => {return light == domain}) {
+            if globalThis.spotlight.some((light) => {return light == domain}) {
               listItem.innerHTML = `<span id="spotlight"><a target="_blank" href="http://${domain}" title="${desc}">${desc}</a><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
             }
             if (domain.startsWith('@') || domain == "data.is-a.dev" || domain == "docs.is-a.dev" || domain == "owl.is-a.dev" || domain == "raw-api.is-a.dev" || domain == "register-bot.is-a.dev" || domain == "team.is-a.dev"  || domain == "www.is-a.dev") {
