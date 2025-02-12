@@ -22,6 +22,20 @@
       }
       return output__;
     }
+    const redirectWarning = (domain, aID, cID) => {
+      return `
+      <div class="WARNING">
+        <h1>WAIT!</h1>
+        <p><span>Are you sure you want to go to "<strong style="padding: 0px !important;">${domain}</strong>"?</span><br>We are not responsible for any content on "<strong style="padding: 0px !important;">${domain}</strong>".<br>They may collect your personal data, such as your IP address.<br>If you believe that "<strong style="padding: 0px !important;">${domain}</strong>" is violating <a href="https://github.com/is-a-dev/register/blob/main/TERMS_OF_SERVICE.md" target="_blank">is-a.dev's Terms Of Service</a>, you can <a href="https://github.com/is-a-dev/register/issues/new?labels=report-abuse&amp;template=report-abuse.md&amp;title=Report+abuse" target="_blank">report it here</a>.</p>
+        <main><button id="${aID || `agree`}">Yes, I want to go to "${domain}" anyway.</button><button id="${cID || `close`}">No, I want to stay here.</button></main>
+      </div>
+      `
+    }
+    const throwNewError = (error) => {
+      console.error(error);
+      window.location.reload();
+      throw new Error(error);
+    }
     try {
       fetch('https://raw-api.is-a.dev/')
         .then(response => response.json())
@@ -29,7 +43,9 @@
           const list1 = document.getElementById('list');
           const list2 = document.getElementById('list-sys');
           const list3 = document.getElementById('main');
+          const dmnID = 0;
           data.forEach(item => {
+            dmnID++;
             const listItem = document.createElement('li');
             let domain = `${item.domain}`
             const name = `${item.owner.username}`;
@@ -38,9 +54,10 @@
               .replaceAll('%20', ' ')
               .replaceAll('%40', '@')
               .replace(/%\w\w/g, "");
-            listItem.innerHTML = `<span><a target="_blank" href="http://${domain}" title="${desc}">${truncateString2(desc, 100)}</a><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
+            const link = `http://${domain}`;
+            listItem.innerHTML = `<span><a target="_blank" href="#" id="subdomain-${dmnID}" title="${desc}">${truncateString2(desc, 50)}</a><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
             if (spotlight.some((light) => {return light == domain})) {
-              listItem.innerHTML = `<span id="spotlight"><a target="_blank" href="http://${domain}" title="${desc}">${desc}</a><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
+              listItem.innerHTML = `<span id="spotlight"><a target="_blank" href="#" id="subdomain-${dmnID}" title="${desc}">${desc}</a><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
             }
             if (domain.startsWith('@') || domain == "data.is-a.dev" || domain == "docs.is-a.dev" || domain == "owl.is-a.dev" || domain == "raw-api.is-a.dev" || domain == "register-bot.is-a.dev" || domain == "team.is-a.dev"  || domain == "www.is-a.dev") {
               if (domain.startsWith('@')) {
@@ -53,9 +70,19 @@
             } else {
               list1.appendChild(listItem);
             }
+            document.getElementById(`subdomain-${dmnID}`).addEventListener("click", () => {
+              document.body.appendChild(redirectWarning(domain, `agree-${dmnID}`, `close-${dmnID}`));
+              document.getElementById(`agree-${dmnID}`).addEventListener("click", () => {
+                window.open(link, "_blank");
+                window.location.reload();
+              });
+              document.getElementById(`close-${dmnID}`).addEventListener("click", () => {
+                window.location.reload();
+              });
+            });
           });
         })
-        .catch(error => console.error('Error fetching data:', error));
+        .catch(error => throwNewError(`Error fetching data: ${error}`));
     } catch (error) {
       alert(`Uh Oh! ${error}. Please try again later.`)
     }
