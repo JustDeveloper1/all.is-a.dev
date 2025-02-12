@@ -41,7 +41,7 @@
       throw new Error(error);
     };
     
-    const processChunks = (data) => {
+    const processChunks = async (data) => {
       const chunkSize = Math.max(75, Math.floor(data.length / (window.navigator.hardwareConcurrency || 1)));
       for (let i = 0; i < data.length; i += chunkSize) {
         const chunk = data.slice(i, i + chunkSize);
@@ -60,7 +60,11 @@
           const list2 = document.getElementById('list-sys');
           const list3 = document.getElementById('main');
           let dmnID = 0;
-    
+          
+          list1.innerHTML = ``;
+          list2.innerHTML = ``;
+          list3.innerHTML = ``;
+
           processChunks(data).then(() => {
             data.forEach(item => {
               dmnID++;
@@ -208,9 +212,21 @@
     <p>This website is <strong style="text-decoration: underline; padding: 0px !important;">NOT</strong> claiming to be an official website/subdomain of is-a.dev. This is just a visualized version of <a href="https://raw-api.is-a.dev/" target="_blank">raw-api.is-a.dev</a>.</p>
   </div>
   <p>Official Subdomains <small>(Check <a href="https://docs.is-a.dev/" target="_blank" title="is-a.dev documentation">https://docs.is-a.dev/</a>)</small></p>
-  <ul id="main"></ul>
+  <ul id="main">
+    <li>
+      <span>Loading...</span>
+    </li>
+  </ul>
   <p>Subdomains</p>
-  <ul id="list"></ul>
+  <ul id="list">
+    <li>
+      <span>Loading...</span>
+    </li>
+  </ul>
   <p>Subdomains that are most likely made for verifications</p>
-  <ul id="list-sys"></ul>
+  <ul id="list-sys">
+    <li>
+      <span>Loading...</span>
+    </li>
+  </ul>
 </body>
