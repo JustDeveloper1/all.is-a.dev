@@ -55,9 +55,9 @@
               .replaceAll('%40', '@')
               .replace(/%\w\w/g, "");
             const link = `http://${domain}`;
-            listItem.innerHTML = `<span><a target="_blank" href="#" id="subdomain-${dmnID}" title="${desc}">${truncateString2(desc, 50)}</a><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
+            listItem.innerHTML = `<span><a href="#" id="subdomain-${dmnID}" title="${desc}">${truncateString2(desc, 50)}</a><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
             if (spotlight.some((light) => {return light == domain})) {
-              listItem.innerHTML = `<span id="spotlight"><a target="_blank" href="#" id="subdomain-${dmnID}" title="${desc}">${desc}</a><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
+              listItem.innerHTML = `<span id="spotlight"><a href="#" id="subdomain-${dmnID}" title="${desc}">${desc}</a><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
             }
             if (domain.startsWith('@') || domain == "data.is-a.dev" || domain == "docs.is-a.dev" || domain == "owl.is-a.dev" || domain == "raw-api.is-a.dev" || domain == "register-bot.is-a.dev" || domain == "team.is-a.dev"  || domain == "www.is-a.dev") {
               if (domain.startsWith('@')) {
@@ -72,7 +72,7 @@
             }
             setTimeout(() => {
               document.getElementById(`subdomain-${dmnID}`).addEventListener("click", () => {
-                document.body.appendChild(redirectWarning(domain, `agree-${dmnID}`, `close-${dmnID}`));
+                document.body.innerHTML += redirectWarning(domain, `agree-${dmnID}`, `close-${dmnID}`);
                 setTimeout(() => {
                   document.getElementById(`agree-${dmnID}`).addEventListener("click", () => {
                     window.open(link, "_blank");
