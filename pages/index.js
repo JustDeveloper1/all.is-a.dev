@@ -118,7 +118,7 @@ const Home = () => {
     try {
       fetch('https://raw-api.is-a.dev/')
         .then(response => response.json())
-        .then(data => {
+        .then(async data => {
           const list1 = document.getElementById('list');
           const list2 = document.getElementById('list-sys');
           const list3 = document.getElementById('main');
@@ -132,8 +132,8 @@ const Home = () => {
             return `"${index}":"${item.domain}",`;
           }).join('').slice(0, -1)}}`);
 
-          processChunks(data).then(() => {
-            data.forEach(item => {
+          processChunks(data).then(async () => {
+            data.forEach(async item => {
               dmnID++;
               const listItem = document.createElement('li');
               let domain = `${item.domain}`;
@@ -189,9 +189,11 @@ const Home = () => {
                   }
                   newList.appendChild(listItem);
               }
+              await new Promise(resolve => setTimeout(resolve, 100));
             });
+            await new Promise(resolve => setTimeout(resolve, 100));
           });
-
+          await new Promise(resolve => setTimeout(resolve, 100));
           const handleClick = (target) => {
             const dmnID = `${target.id.replace('subdomain-', '')}`;
                 const domain = listItems.dmnID;
@@ -208,7 +210,6 @@ const Home = () => {
                     });
                 }
           }
-
           list1.addEventListener('click', (event) => {
             const target = event.target.closest('.subdomain-link');
             if (target) handleClick(target);
