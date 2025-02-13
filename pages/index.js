@@ -161,7 +161,7 @@ const Home = () => {
             } else {
               return { html: listItemHTML, appendTo: list1 };
             }
-          });
+          });console.log(listItemsHTML);
 
           listItemsHTML.forEach(item => {
             try { item.appendTo.innerHTML += item.html; } catch {}
