@@ -1,0 +1,130 @@
+<!-- 
+
+MIT License
+
+Copyright (c) 2024 JustDeveloper <https://justdeveloper.is-a.dev/>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+\-->
+
+<!-- Modified by JustStudio. \-->
+
+<!DOCTYPE html>
+<head>
+    <title>Encoder.js</title>
+    <style>
+    #loader {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1000001;
+      width: 60px;
+      height: 60px;
+      margin: -35px 0 0 -35px;
+      border: 5px solid #0F0F4F;
+      border-radius: 50%;
+      border-top: 5px solid #6e3bf3;
+      -webkit-animation: spin 1.5s linear infinite;
+      animation: spin 1s linear infinite;
+	    transition-duration: 0.5s;
+    }
+    #loaderbg {
+    	position: absolute;
+    	background-color: #000040;
+        width: 100%;
+        height: 100%;
+	    z-index: 1000000;
+	    transition-duration: 0.5s;
+    }
+
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+
+    @-webkit-keyframes animatebottom {
+      from { bottom:-100px; opacity:0 } 
+      to { bottom:0px; opacity:1 }
+    }
+
+    @keyframes animatebottom { 
+      from{ bottom:-100px; opacity:0 } 
+      to{ bottom:0; opacity:1 }
+    }
+
+    #content {
+      display: none;
+      text-align: center;
+    }
+    </style>
+    <script>
+	    if (window.parent.frames.length > 0 && document.referrer.indexOf('juststudio.is-a.dev') == -1) {
+    		window.stop();
+	    }
+    </script>
+    <script>
+        if (window.location.pathname == "/1") {
+	    window.location.href = "/ru"
+	} else if (window.location.pathname == "/Encoder/1") {
+	    window.location.href = "/Encoder/ru"
+	} else if (window.location.pathname == "/Encoder/0" || window.location.pathname == "/Encoder/ru/0") {
+	    window.location.href = "/Encoder/"
+	} else {
+	    window.location.href = "/"
+	}
+    </script>
+</head>
+<body>
+    <div id="loader"></div>
+    <div id="loaderbg"></div>
+    <noscript>
+	    <span style="
+		    position: absolute; 
+		    top: 50%; 
+		    left: 50%; 
+		    transform: 
+			    translate(-50%, -50%) 
+			    scale(111%) 
+			    rotateZ(2deg); 
+		    color: #FFFFFF; 
+		    z-index: 1000001; 
+		    padding: 2px; 
+		    background-color: rgba(0,0,0,0.33); 
+		    border-radius: 5px; 
+		    border-style: solid; 
+		    border-width: 2px; 
+		    border-color: #FFFFFF; 
+		    backdrop-filter: blur(4px); 
+		    box-shadow: 2px 2px 5px 0px #FFFFFF;
+		    ">
+		    You need to enable JavaScript in your browser settings to access this website.
+	    </span>
+    </noscript>
+    <p>Error 404. Not Found!</p>
+    <a href="/" target="_self">
+        <p>Back to Homepage</p>
+    </a>
+</body>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<head>
+  <title>Every website on .is-a.dev</title>
+  <script>
+    const spotlight = [
+      
+      // to be spotlighted...
+      
+    ];
+    const js_subdomains = [
+      
+      "juststudio.is-a.dev",
+      
+      "justdeveloper.is-a.dev",
+      
+    ]
+    const js_partners = [
+      
+      "kappy.is-a.dev",
+      
+      "playreaver.is-a.dev",
+      
+    ]
+    const maintainers = [
+
+      "cutedog5695.is-a.dev",
+      "iostpa.is-a.dev",
+      
+      "orangc.is-a.dev",
+
+      "stefdp.is-a.dev",
+
+      "william.is-a.dev",
+
+      "21z.is-a.dev"
+      
+    ]
+    
+    function truncateString(str, num) {
+      return str.length > num ? str.slice(0, num) : str;
+    }
+    
+    function truncateString2(str, num) {
+      let output__ = truncateString(str, num - 3);
+      if (str !== output__) {
+        output__ += "...";
+      }
+      return output__;
+    }
+    
+    const redirectWarning = (domain, aID, cID) => {
+      return `
+      <div class="WARNING">
+        <h1>WAIT!</h1>
+        <p><span>Are you sure you want to go to "<strong style="padding: 0px !important;">${domain}</strong>"?</span><br>We are not responsible for any content on "<strong style="padding: 0px !important;">${domain}</strong>".<br>They may collect your personal data, such as your IP address.<br>If you believe that "<strong style="padding: 0px !important;">${domain}</strong>" is violating <a href="https://github.com/is-a-dev/register/blob/main/TERMS_OF_SERVICE.md" target="_blank">is-a.dev's Terms Of Service</a>, you can <a href="https://github.com/is-a-dev/register/issues/new?labels=report-abuse&amp;template=report-abuse.md&amp;title=Report+abuse" target="_blank">report it here</a>.</p>
+        <main><button id="${aID || `agree`}">Yes, I want to go to "${domain}" anyway.</button><button id="${cID || `close`}">No, I want to stay here.</button></main>
+      </div>
+      `;
+    };
+    
+    const throwNewError = (error) => {
+      console.error(error);
+      window.location.reload();
+      throw new Error(error);
+    };
+    
+    const processChunks = async (data) => {
+      const chunkSize = Math.max(75, Math.floor(data.length / (window.navigator.hardwareConcurrency || 1)));
+      for (let i = 0; i < data.length; i += chunkSize) {
+        const chunk = data.slice(i, i + chunkSize);
+        chunk.forEach(item => {
+          
+        });
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+    };
+
+    function isOfficial(domain) {
+      const offs = [
+        '@.is-a.dev',
+        'data.is-a.dev',
+        'docs.is-a.dev',
+        'owl.is-a.dev',
+        'raw-api.is-a.dev',
+        'register-bot.is-a.dev',
+        'team.is-a.dev',
+        'www.is-a.dev'
+      ];
+      return (offs.some(off => off === domain))
+    }
+
+    function isSys(domain) {
+      const prefix = [
+        '_',
+        'zmail._domainkey'
+      ]
+      return (prefix.some(pfx => domain.startsWith(pfx)))
+    }
+
+    function toBeSpotlighted(domain) {
+      return (spotlight.some(thing => thing === domain) || js_subdomains.some(subdomain => subdomain === domain) || js_partners.some(partner => partner === domain) || maintainers.some(one => one === domain))
+    }
+    
+    try {
+      fetch('https://raw-api.is-a.dev/')
+        .then(response => response.json())
+        .then(data => {
+          const list1 = document.getElementById('list');
+          const list2 = document.getElementById('list-sys');
+          const list3 = document.getElementById('main');
+          let dmnID = 0;
+          
+          list1.innerHTML = ``;
+          list2.innerHTML = ``;
+          list3.innerHTML = ``;
+
+          processChunks(data).then(() => {
+            data.forEach(item => {
+              dmnID++;
+              const listItem = document.createElement('li');
+              let domain = `${item.domain}`;
+              const name = `${item.owner.username}`;
+              const namelink = name.toLowerCase();
+              const desc = encodeURIComponent(`${item.description || domain}`)
+                .replaceAll('%20', ' ')
+                .replaceAll('%40', '@')
+                .replace(/%\w\w/g, "");
+              const link = `http://${domain}`;
+              listItem.innerHTML = `<span><div class="subdomain-link" id="subdomain-${dmnID}" title="${desc}">${truncateString2(desc, 50)}</div><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
+              
+              if (toBeSpotlighted(domain)) {
+                listItem.innerHTML = `<span id="spotlight"><div class="subdomain-link" id="subdomain-${dmnID}" title="${desc}">${desc}</div><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
+              }
+
+              if (isOfficial(domain)) {
+                if (domain === "@.is-a.dev") {
+                  domain = domain.replace('@.', '');
+                  listItem.innerHTML = `<span><div class="subdomain-link" target="_blank" title="${desc}">The root domain (is-a.dev)</div><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
+                }
+                list3.appendChild(listItem);
+              } else if (isSys(domain)) {
+                list2.appendChild(listItem);
+              } else {
+                list1.appendChild(listItem);
+              }
+
+              try {
+                document.getElementById(`subdomain-${dmnID}`).addEventListener("click", () => {
+                  document.body.innerHTML += redirectWarning(domain, `agree-${dmnID}`, `close-${dmnID}`);
+                  document.getElementById(`agree-${dmnID}`).addEventListener("click", () => {
+                    window.open(link, "_blank");
+                    window.location.reload();
+                  });
+                  document.getElementById(`close-${dmnID}`).addEventListener("click", () => {
+                    window.location.reload();
+                  });
+                });
+              } catch {
+                if (isOfficial(domain)) {
+                  try {list3.removeChild(listItem);} catch {}
+                } else if (isSys(domain)) {
+                  try {list2.removeChild(listItem);} catch {}
+                } else {
+                  try {list1.removeChild(listItem);} catch {}
+                }
+                let newList = document.getElementById('errors');
+                if (!newList) {
+                  newList = document.createElement('ul');
+                  newList.style.display = 'none';
+                  newList.id = 'errors';
+                }
+                newList.appendChild(listItem);
+              }
+            });
+          });
+        })
+        .catch(error => throwNewError(`Error fetching data: ${error}`));
+    } catch (error) {
+      alert(`Uh Oh! ${error}. Please try again later.`);
+    }
+  </script>
+  <style>
+    body, body * {
+      font-family: monospace;
+      background-color: #161616;
+      color: #ededed;
+    }
+    a, .subdomain-link {
+      color: #6e3bf3 !important;
+      text-decoration: underline;
+      background-color: transparent !important;
+    }
+    span {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      align-content: center;
+      align-items: center;
+      width: 100%;
+      border-bottom: 1px solid #6e2bf34f;
+    }
+    ::marker {
+      color: #555555;
+    }
+    ::-moz-selection {
+      color: #fff;
+      background: #6e3bf3
+    }
+    ::selection {
+      color: #fff;
+      background: #6e3bf3
+    }
+    ::-webkit-scrollbar {
+        height: .625rem;
+        width: .625rem
+    }
+    ::-webkit-scrollbar-track {
+        background-color: transparent
+    }
+    ::-webkit-scrollbar-thumb {
+        border-radius: 9999px;
+        border: 1px solid transparent;
+        background-color: #6e3bf3;
+        background-clip: padding-box
+    }
+    #spotlight {
+      filter: drop-shadow(0px 0px 6px #6e3bf377);
+      -webkit-filter: drop-shadow(0px 0px 6px #6e3bf377);
+      padding-top: 5px;
+      padding-bottom: 7px;
+      border-radius: 5px;
+      margin-top: 5px;
+      margin-bottom: 2px;
+      border: 2px solid #6e3bf350;
+      padding-right: 5px;
+      padding-left: 5px;
+      max-width: calc(100% - 16px);
+      left: 3px;
+      position: relative;
+    }
+    .DISCLAIMER {
+      margin: 10px !important;
+      margin-left: 0px !important;
+      padding-left: 4px;
+      border-left: 4px solid #6e3bf3;
+      width: auto;
+      border-bottom-right-radius: 20px;
+      border-top-right-radius: 20px;
+      filter: drop-shadow(-2px 0px 15px #251257);
+      -webkit-filter: drop-shadow(-2px 0px 15px #251257);
+    }
+    .DISCLAIMER, .DISCLAIMER * {
+      background-color: #251257;
+      margin: 0px;
+      padding: 5px;
+    }
+    .DISCLAIMER a {
+      padding: 2px;
+      background-color: #1d1041;
+      border-radius: 5px;
+      color: #b49fed !important;
+    }
+    info {
+      display: flex;
+      gap: 5px;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
+    }
+    .WARNING {
+      position: fixed;
+      z-index: 2;
+      top: 15px;
+      left: 15px;
+      padding: 30px;
+      width: calc(100% - 90px);
+      height: calc(100% - 90px);
+      background-color: transparent;
+    }
+    .WARNING:before {
+      content: '';
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background-color: #16161699;
+      top: 0%;
+      left: 0%;
+      z-index: -2;
+      backdrop-filter: blur(8px) brightness(50%);
+      -webkit-backdrop-filter: blur(8px) brightness(50%);
+    }
+    .WARNING * {
+      background-color: transparent;
+    }
+    .WARNING h1 {
+      color: #6e3bf3;
+      filter: 
+              drop-shadow(1px 1px #6e3bf3) drop-shadow(1px 0px #fafafa)
+              drop-shadow(-1px -1px #6e3bf360) drop-shadow(-1px 0px #fafafa)
+              drop-shadow(-1px 1px #fafafa) drop-shadow(0px 1px #fafafa)
+              drop-shadow(1px -1px #fafafa) drop-shadow(0px -1px #fafafa)
+          
+              drop-shadow(1px 1px #6e3bf3) drop-shadow(1px 0px #1d1d1d)
+              drop-shadow(-1px -1px #6e3bf360) drop-shadow(-1px 0px #1d1d1d)
+              drop-shadow(-1px 1px #1d1d1d) drop-shadow(0px 1px #1d1d1d)
+              drop-shadow(1px -1px #1d1d1d) drop-shadow(0px -1px #1d1d1d);
+      -webkit-filter: 
+              drop-shadow(1px 1px #6e3bf3) drop-shadow(1px 0px #fafafa)
+              drop-shadow(-1px -1px #6e3bf360) drop-shadow(-1px 0px #fafafa)
+              drop-shadow(-1px 1px #fafafa) drop-shadow(0px 1px #fafafa)
+              drop-shadow(1px -1px #fafafa) drop-shadow(0px -1px #fafafa)
+          
+              drop-shadow(1px 1px #6e3bf3) drop-shadow(1px 0px #1d1d1d)
+              drop-shadow(-1px -1px #6e3bf360) drop-shadow(-1px 0px #1d1d1d)
+              drop-shadow(-1px 1px #1d1d1d) drop-shadow(0px 1px #1d1d1d)
+              drop-shadow(1px -1px #1d1d1d) drop-shadow(0px -1px #1d1d1d);
+      font-size: xxx-large;
+      font-weight: 900;
+      pointer-events: none;
+      user-select: none;
+    }
+    .WARNING span {
+      display: block;
+      font-weight: 900;
+      font-size: 18px;
+      text-align: center;
+      background-color: #00000040 !important;
+      border-radius: 10px;
+      border-bottom-width: 3px;
+    }
+    .WARNING main {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: calc(100% - 90px);
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-content: center;
+      justify-content: space-between;
+      align-items: center;
+      gap: 5px;
+    }
+    .WARNING button {
+      background-color: #6e3bf3bd;
+      border: 2px solid #fefefebd;
+      border-radius: 50px;
+      padding: 5px;
+      padding-left: 10px;
+      padding-right: 10px;
+      cursor: pointer;
+    }
+    .WARNING button:hover, a:hover, .subdomain-link:hover {
+      filter: drop-shadow(0px 0px 6px #6e3bf3);
+      -webkit-filter: drop-shadow(0px 0px 6px #6e3bf3);
+    }
+    body:has(.WARNING) {
+      overflow: hidden;
+    }
+    .WARNING button, a, .subdomain-link {
+      transition: 500ms;
+    }
+  </style>
+</head>
+<body>
+  <h1>Every website on .is-a.dev</h1>
+  <img alt="Domains Count" src="https://img.shields.io/github/directory-file-count/is-a-dev/register/domains?color=5c46eb&label=domains&style=for-the-badge">
+  <div class="DISCLAIMER">
+    <h1>DISCLAIMER</h1>
+    <p>This website is <strong style="text-decoration: underline; padding: 0px !important;">NOT</strong> claiming to be an official website/subdomain of is-a.dev. This is just a visualized version of <a href="https://raw-api.is-a.dev/" target="_blank">raw-api.is-a.dev</a>.</p>
+  </div>
+  <p>Official Subdomains <small>(Check <a href="https://docs.is-a.dev/" target="_blank" title="is-a.dev documentation">https://docs.is-a.dev/</a>)</small></p>
+  <ul id="main">
+    <li>
+      <span>Loading...</span>
+    </li>
+  </ul>
+  <p>Subdomains</p>
+  <ul id="list">
+    <li>
+      <span>Loading...</span>
+    </li>
+  </ul>
+  <p>Subdomains that are most likely made for verifications</p>
+  <ul id="list-sys">
+    <li>
+      <span>Loading...</span>
+    </li>
+  </ul>
+</body>
