@@ -128,6 +128,10 @@ const Home = () => {
           list2.innerHTML = ``;
           list3.innerHTML = ``;
 
+          const listItems = JSON.parse(`{${data.map((item, index) => {
+            return `"${index}":"${item.domain}",`;
+          }).join('').slice(0, -1)}}`);
+
           processChunks(data).then(() => {
             data.forEach(item => {
               dmnID++;
@@ -166,22 +170,34 @@ const Home = () => {
               }
 
               try {
-                setTimeout(() => {
-                    const sdinfoelem = document.getElementById(`info-${dmnID}`);
-                    const sdlinkelem = document.getElementById(`subdomain-${dmnID}`);
-                    sdinfoelem.style = `--x: ${sdlinkelem.offsetLeft + sdlinkelem.offsetWidth + 5};`;
-                }, 10+dmnID/10)
-              } catch (idiot) {
-                alert(idiot);
-                console.error(idiot);
-                throw new Error(idiot);
-              }
-
-              try {
-                document.getElementById(`subdomain-${dmnID}`).addEventListener("click", () => {
-                  if (isOfficial(domain)) {
-                    window.open(link, "_blank");
+                const sdinfoelem = document.getElementById(`info-${dmnID}`);
+                const sdlinkelem = document.getElementById(`subdomain-${dmnID}`);
+                sdinfoelem.style = `--x: ${sdlinkelem.offsetLeft + sdlinkelem.offsetWidth + 5};`;
+              } catch {
+                if (isOfficial(domain)) {
+                    try { list3.removeChild(listItem); } catch {}
+                  } else if (isSys(domain)) {
+                    try { list2.removeChild(listItem); } catch {}
                   } else {
+                    try { list1.removeChild(listItem); } catch {}
+                  }
+                  let newList = document.getElementById('errors');
+                  if (!newList) {
+                    newList = document.createElement('ul');
+                    newList.style.display = 'none';
+                    newList.id = 'errors';
+                  }
+                  newList.appendChild(listItem);
+              }
+            });
+          });
+
+          const handleClick = (target) => {
+            const dmnID = `${target.id.replace('subdomain-', '')}`;
+                const domain = listItems.dmnID;
+                if (isOfficial(domain)) {
+                    window.open(link, "_blank");
+                } else {
                     document.body.innerHTML += redirectWarning(domain, `agree-${dmnID}`, `close-${dmnID}`);
                     document.getElementById(`agree-${dmnID}`).addEventListener("click", () => {
                         window.open(link, "_blank");
@@ -190,25 +206,20 @@ const Home = () => {
                     document.getElementById(`close-${dmnID}`).addEventListener("click", () => {
                         window.location.reload();
                     });
-                  }
-                });
-              } catch {
-                if (isOfficial(domain)) {
-                  try { list3.removeChild(listItem); } catch {}
-                } else if (isSys(domain)) {
-                  try { list2.removeChild(listItem); } catch {}
-                } else {
-                  try { list1.removeChild(listItem); } catch {}
                 }
-                let newList = document.getElementById('errors');
-                if (!newList) {
-                  newList = document.createElement('ul');
-                  newList.style.display = 'none';
-                  newList.id = 'errors';
-                }
-                newList.appendChild(listItem);
-              }
-            });
+          }
+
+          list1.addEventListener('click', (event) => {
+            const target = event.target.closest('.subdomain-link');
+            if (target) handleClick(target);
+          });
+          list2.addEventListener('click', (event) => {
+            const target = event.target.closest('.subdomain-link');
+            if (target) handleClick(target);
+          });
+          list3.addEventListener('click', (event) => {
+            const target = event.target.closest('.subdomain-link');
+            if (target) handleClick(target);
           });
         })
         .catch(error => throwNewError(`Error fetching data: ${error}`));
