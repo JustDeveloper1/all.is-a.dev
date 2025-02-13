@@ -85,6 +85,7 @@ const Home = () => {
         chunk.forEach(item => {
           // Process each item...
         });
+        await new Promise(resolve => setTimeout(resolve, 100));
       }
     };
 
