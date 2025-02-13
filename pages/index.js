@@ -34,6 +34,8 @@ const Home = () => {
     const js_subdomains = [
       "juststudio.is-a.dev",
       "justdeveloper.is-a.dev",
+      "encoder.js.is-a.dev",
+      "all.is-a.dev"
     ];
     const js_partners = [
       "kappy.is-a.dev",
@@ -133,21 +135,28 @@ const Home = () => {
               let domain = `${item.domain}`;
               const name = `${item.owner.username}`;
               const namelink = name.toLowerCase();
-              const desc = encodeURIComponent(`${item.description || domain}`)
+              let desc = `${item.description || domain}`;
+              let sdinfo = '';
+              if (desc !== domain) {
+                sdinfo = `<div class="subdomain-info">(${domain}) <small>#${dmnID}</small></div>`;
+              } else {
+                sdinfo = `<div class="subdomain-info"><small>#${dmnID}</small></div>`;
+              }
+              desc = encodeURIComponent(desc)
                 .replaceAll('%20', ' ')
                 .replaceAll('%40', '@')
                 .replace(/%\w\w/g, "");
               const link = `http://${domain}`;
-              listItem.innerHTML = `<span><div class="subdomain-link" id="subdomain-${dmnID}" title="${desc}">${truncateString2(desc, 50)}</div><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
+              listItem.innerHTML = `<span><div class="subdomain-link" id="subdomain-${dmnID}" title="${desc}">${truncateString2(desc, 50)}</div>${sdinfo}<info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
 
               if (toBeSpotlighted(domain)) {
-                listItem.innerHTML = `<span id="spotlight"><div class="subdomain-link" id="subdomain-${dmnID}" title="${desc}">${desc}</div><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
+                listItem.innerHTML = `<span id="spotlight"><div class="subdomain-link" id="subdomain-${dmnID}" title="${desc}">${desc}</div>${sdinfo}<info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
               }
 
               if (isOfficial(domain)) {
                 if (domain === "@.is-a.dev") {
                   domain = domain.replace('@.', '');
-                  listItem.innerHTML = `<span><a class="subdomain-link" target="_blank" title="${desc}" href="${link}">The root domain (is-a.dev)</a><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
+                  listItem.innerHTML = `<span><a class="subdomain-link" target="_blank" title="${desc}" href="${link}">The root domain (is-a.dev)</a>${sdinfo}<info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
                 }
                 list3.appendChild(listItem);
               } else if (isSys(domain)) {
