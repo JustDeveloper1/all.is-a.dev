@@ -74,7 +74,7 @@ const Home = () => {
 
     const throwNewError = (error) => {
       console.error(error);
-      window.location.reload();
+      //window.location.reload();
       throw new Error(error);
     };
 
