@@ -147,7 +147,7 @@ const Home = () => {
               if (isOfficial(domain)) {
                 if (domain === "@.is-a.dev") {
                   domain = domain.replace('@.', '');
-                  listItem.innerHTML = `<span><div class="subdomain-link" target="_blank" title="${desc}">The root domain (is-a.dev)</div><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
+                  listItem.innerHTML = `<span><a class="subdomain-link" target="_blank" title="${desc}" href="${link}">The root domain (is-a.dev)</a><info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
                 }
                 list3.appendChild(listItem);
               } else if (isSys(domain)) {
