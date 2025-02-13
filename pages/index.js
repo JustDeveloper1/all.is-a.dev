@@ -135,7 +135,6 @@ const Home = () => {
           await processChunks(data);
 
           const listItemsHTML = data.map(async(item, index) => {
-            await new Promise(resolve => setTimeout(resolve, 100+index/10));
             dmnID++;
             const domain = `${item.domain}`;
             const name = `${item.owner.username}`;
