@@ -85,8 +85,8 @@ const Home = () => {
         chunk.forEach(item => {
           // do nothing (lmao)
         });
-        await new Promise(resolve => setTimeout(resolve, 100));
       }
+      await new Promise(resolve => setTimeout(resolve, 100));
     };
 
     const isOfficial = (domain) => {
