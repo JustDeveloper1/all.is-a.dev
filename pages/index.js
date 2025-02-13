@@ -158,14 +158,18 @@ const Home = () => {
 
               try {
                 document.getElementById(`subdomain-${dmnID}`).addEventListener("click", () => {
-                  document.body.innerHTML += redirectWarning(domain, `agree-${dmnID}`, `close-${dmnID}`);
-                  document.getElementById(`agree-${dmnID}`).addEventListener("click", () => {
+                  if (isOfficial(domain)) {
                     window.open(link, "_blank");
-                    window.location.reload();
-                  });
-                  document.getElementById(`close-${dmnID}`).addEventListener("click", () => {
-                    window.location.reload();
-                  });
+                  } else {
+                    document.body.innerHTML += redirectWarning(domain, `agree-${dmnID}`, `close-${dmnID}`);
+                    document.getElementById(`agree-${dmnID}`).addEventListener("click", () => {
+                        window.open(link, "_blank");
+                        window.location.reload();
+                    });
+                    document.getElementById(`close-${dmnID}`).addEventListener("click", () => {
+                        window.location.reload();
+                    });
+                  }
                 });
               } catch {
                 if (isOfficial(domain)) {
@@ -194,30 +198,43 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Every website on .is-a.dev</h1>
-      <img alt="Domains Count" src="https://img.shields.io/github/directory-file-count/is-a-dev/register/domains?color=5c46eb&label=domains&style=for-the-badge" />
-      <div className="DISCLAIMER">
-        <h1>DISCLAIMER</h1>
-        <p>This website is <strong style={{ textDecoration: 'underline', padding: '0px !important' }}>NOT</strong> claiming to be an official website/subdomain of is-a.dev. This is just a visualized version of <a href="https://raw-api.is-a.dev/" target="_blank">raw-api.is-a.dev</a>.</p>
-      </div>
-      <p>Official Subdomains <small>(Check <a href="https://docs.is-a.dev/" target="_blank" title="is-a.dev documentation">https://docs.is-a.dev/</a>)</small></p>
-      <ul id="main">
-        <li>
-          <span>Loading...</span>
-        </li>
-      </ul>
-      <p>Subdomains</p>
-      <ul id="list">
-        <li>
-          <span>Loading...</span>
-        </li>
-      </ul>
-      <p>Subdomains that are most likely made for verifications</p>
-      <ul id="list-sys">
-        <li>
-          <span>Loading...</span>
-        </li>
-      </ul>
+        <div class="NOT-A DISCLAIMER THIS-IS-HEADER">
+            <img alt="Domains Count" src="https://img.shields.io/github/directory-file-count/is-a-dev/register/domains?color=6e3bf3&amp;label=domains&amp;style=for-the-badge" width="106" height="31" />
+            <h1>
+                js.is-a.dev
+            </h1>
+            <h1>
+                all.is-a.dev
+            </h1>
+            <h1>
+                jd.is-a.dev
+            </h1>
+            <p>
+                Every website on .is-a.dev
+            </p>
+        </div>
+        <div className="DISCLAIMER">
+            <h1>DISCLAIMER</h1>
+            <p>This website is <strong style={{ textDecoration: 'underline', padding: '0px !important' }}>NOT</strong> claiming to be an official website/subdomain of is-a.dev. This is just a visualized version of <a href="https://raw-api.is-a.dev/" target="_blank">raw-api.is-a.dev</a>.</p>
+        </div>
+        <p>Official Subdomains <small>(Check <a href="https://docs.is-a.dev/" target="_blank" title="is-a.dev documentation">https://docs.is-a.dev/</a>)</small></p>
+        <ul id="main">
+            <li>
+                <span>Loading...</span>
+            </li>
+        </ul>
+        <p>Subdomains</p>
+        <ul id="list">
+            <li>
+                <span>Loading...</span>
+            </li>
+        </ul>
+        <p>Subdomains that are most likely made for verifications</p>
+        <ul id="list-sys">
+            <li>
+                <span>Loading...</span>
+            </li>
+        </ul>
     </div>
   );
 };

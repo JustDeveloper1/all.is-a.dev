@@ -24,20 +24,21 @@ SOFTWARE.
 
 */
 
-body {
-    margin: 30px;
-    margin-right: 20px;
+.NOT-A img {
+    position: absolute;
+    z-index: 1;
+    bottom: 0px;
+    right: 0px;
+    border-radius: 20px;
 }
-.subdomain-link, info, info a {
-    font-size: 14px;
-    line-height: 1.5;
+.NOT-A h1:first-of-type, .NOT-A h1:last-of-type  {
+    opacity: 0;
 }
-ul {
-    margin-top: 10px;
+.NOT-A h1 {
+    text-align: center;
 }
-p {
-    margin-top: 20px;
-}
-.DISCLAIMER p {
-    font-size: 14px;
+.NOT-A p {
+    text-align: center;
+    position: fixed;
+    bottom: 0%;
 }

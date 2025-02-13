@@ -1,4 +1,4 @@
-/*
+<!-- 
 
 MIT License
 
@@ -22,22 +22,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-*/
-
-body {
-    margin: 30px;
-    margin-right: 20px;
-}
-.subdomain-link, info, info a {
-    font-size: 14px;
-    line-height: 1.5;
-}
-ul {
-    margin-top: 10px;
-}
-p {
-    margin-top: 20px;
-}
-.DISCLAIMER p {
-    font-size: 14px;
-}
+\-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+<loc>https://all.is-a.dev/</loc>
+<lastmod>2025-01-29T12:25:45+00:00</lastmod>
+<priority>1.00</priority>
+</url>
+</urlset>
