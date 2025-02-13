@@ -166,9 +166,11 @@ const Home = () => {
               }
 
               try {
-                const sdinfoelem = document.getElementById(`info-${dmnID}`);
-                const sdlinkelem = document.getElementById(`subdomain-${dmnID}`);
-                sdinfoelem.style = `--x: ${sdlinkelem.offsetLeft + sdlinkelem.offsetWidth + 5};`;
+                setTimeout(() => {
+                    const sdinfoelem = document.getElementById(`info-${dmnID}`);
+                    const sdlinkelem = document.getElementById(`subdomain-${dmnID}`);
+                    sdinfoelem.style = `--x: ${sdlinkelem.offsetLeft + sdlinkelem.offsetWidth + 5};`;
+                }, 10+dmnID/10)
               } catch {}
 
               try {
