@@ -164,7 +164,6 @@ const Home = () => {
 
           listItemsHTML.forEach(async item => {
             try { item.appendTo.innerHTML += item.html; } catch {}
-            await new Promise(resolve => setTimeout(resolve, 100));
           });
 
           const handleClick = (target) => {
