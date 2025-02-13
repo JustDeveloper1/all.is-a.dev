@@ -164,7 +164,7 @@ const Home = () => {
           });
 
           listItemsHTML.forEach(item => {
-            item.appendTo.innerHTML += item.html;
+            try { item.appendTo.innerHTML += item.html; } catch {}
           });
 
           const handleClick = (target) => {
