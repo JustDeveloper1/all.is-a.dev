@@ -134,7 +134,7 @@ const Home = () => {
 
           await processChunks(data);
 
-          const listItemsHTML = data.map(async(item, index) => {
+          const listItemsHTML = data.map((item, index) => {
             dmnID++;
             const domain = `${item.domain}`;
             const name = `${item.owner.username}`;
@@ -162,8 +162,9 @@ const Home = () => {
             }
           });console.log(listItemsHTML);
 
-          listItemsHTML.forEach(item => {
+          listItemsHTML.forEach(async item => {
             try { item.appendTo.innerHTML += item.html; } catch {}
+            await new Promise(resolve => setTimeout(resolve, 100));
           });
 
           const handleClick = (target) => {
