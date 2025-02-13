@@ -1,5 +1,7 @@
 .subdomain-info {
     font-size: 12px;
+    position: absolute;
+    left: var(--x);
 }
 .subdomain-info, .subdomain-info small {
     color: #555555;

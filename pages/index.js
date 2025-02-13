@@ -138,9 +138,9 @@ const Home = () => {
               let desc = `${item.description || domain}`;
               let sdinfo = '';
               if (desc !== domain) {
-                sdinfo = `<div class="subdomain-info">(${domain}) <small>#${dmnID}</small></div>`;
+                sdinfo = `<div class="subdomain-info" id="info-${dmnID}">(${domain}) <small>#${dmnID}</small></div>`;
               } else {
-                sdinfo = `<div class="subdomain-info"><small>#${dmnID}</small></div>`;
+                sdinfo = `<div class="subdomain-info" id="info-${dmnID}"><small>#${dmnID}</small></div>`;
               }
               desc = encodeURIComponent(desc)
                 .replaceAll('%20', ' ')
@@ -164,6 +164,12 @@ const Home = () => {
               } else {
                 list1.appendChild(listItem);
               }
+
+              try {
+                const sdinfoelem = document.getElementById(`info-${dmnID}`);
+                const sdlinkelem = document.getElementById(`subdomain-${dmnID}`);
+                sdinfoelem.style = `--x: ${sdlinkelem.offsetLeft + sdlinkelem.offsetWidth + 5};`;
+              } catch {}
 
               try {
                 document.getElementById(`subdomain-${dmnID}`).addEventListener("click", () => {
