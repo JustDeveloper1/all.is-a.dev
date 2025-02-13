@@ -85,7 +85,6 @@ const Home = () => {
         chunk.forEach(item => {
           // Process each item...
         });
-        await new Promise(resolve => setTimeout(resolve, 100));
       }
     };
 
@@ -132,96 +131,67 @@ const Home = () => {
             return `"${index}":"${item.domain}",`;
           }).join('').slice(0, -1)}}`);
 
-          processChunks(data).then(async () => {
-            data.forEach(async item => {
-              dmnID++;
-              const listItem = document.createElement('li');
-              let domain = `${item.domain}`;
-              const name = `${item.owner.username}`;
-              const namelink = name.toLowerCase();
-              let desc = `${item.description || domain}`;
-              let sdinfo = '';
-              if (desc !== domain) {
-                sdinfo = `<div class="subdomain-info" id="info-${dmnID}">(${domain}) <small>#${dmnID}</small></div>`;
-              } else {
-                sdinfo = `<div class="subdomain-info" id="info-${dmnID}"><small>#${dmnID}</small></div>`;
-              }
-              desc = encodeURIComponent(desc)
-                .replaceAll('%20', ' ')
-                .replaceAll('%40', '@')
-                .replace(/%\w\w/g, "");
-              const link = `http://${domain}`;
-              listItem.innerHTML = `<span><div class="subdomain-link" id="subdomain-${dmnID}" title="${desc}">${truncateString2(desc, 50)}</div>${sdinfo}<info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
+          await processChunks(data);
 
-              if (toBeSpotlighted(domain)) {
-                listItem.innerHTML = `<span id="spotlight"><div class="subdomain-link" id="subdomain-${dmnID}" title="${desc}">${desc}</div>${sdinfo}<info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
-              }
+          const listItemsHTML = data.map((item, index) => {
+            dmnID++;
+            const domain = `${item.domain}`;
+            const name = `${item.owner.username}`;
+            const namelink = name.toLowerCase();
+            let desc = `${item.description || domain}`;
+            let sdinfo = desc !== domain ? `<div class="subdomain-info" id="info-${dmnID}">(${domain}) <small>#${dmnID}</small></div>` : `<div class="subdomain-info" id="info-${dmnID}"><small>#${dmnID}</small></div>`;
+            desc = encodeURIComponent(desc).replaceAll('%20', ' ').replaceAll('%40', '@').replace(/%\w\w/g, "");
+            const link = `http://${domain}`;
+            let listItemHTML = `<span><div class="subdomain-link" id="subdomain-${dmnID}" title="${desc}">${truncateString2(desc, 50)}</div>${sdinfo}<info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
 
-              if (isOfficial(domain)) {
-                if (domain === "@.is-a.dev") {
-                  domain = domain.replace('@.', '');
-                  listItem.innerHTML = `<span><a class="subdomain-link" target="_blank" title="${desc}" href="${link}">The root domain (is-a.dev)</a>${sdinfo}<info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
-                }
-                list3.appendChild(listItem);
-              } else if (isSys(domain)) {
-                list2.appendChild(listItem);
-              } else {
-                list1.appendChild(listItem);
-              }
+            if (toBeSpotlighted(domain)) {
+              listItemHTML = `<span id="spotlight"><div class="subdomain-link" id="subdomain-${dmnID}" title="${desc}">${desc}</div>${sdinfo}<info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
+            }
 
-              try {
-                const sdinfoelem = document.getElementById(`info-${dmnID}`);
-                const sdlinkelem = document.getElementById(`subdomain-${dmnID}`);
-                sdinfoelem.style = `--x: ${sdlinkelem.offsetLeft + sdlinkelem.offsetWidth + 5};`;
-              } catch {
-                if (isOfficial(domain)) {
-                    try { list3.removeChild(listItem); } catch {}
-                  } else if (isSys(domain)) {
-                    try { list2.removeChild(listItem); } catch {}
-                  } else {
-                    try { list1.removeChild(listItem); } catch {}
-                  }
-                  let newList = document.getElementById('errors');
-                  if (!newList) {
-                    newList = document.createElement('ul');
-                    newList.style.display = 'none';
-                    newList.id = 'errors';
-                  }
-                  newList.appendChild(listItem);
+            if (isOfficial(domain)) {
+              if (domain === "@.is-a.dev") {
+                listItemHTML = `<span><a class="subdomain-link" target="_blank" title="${desc}" href="${link}">The root domain (is-a.dev)</a>${sdinfo}<info> by <a target="_blank" href="https://github.com/${namelink}" title="@${name} on GitHub">${name}</a></info></span>`;
+                return { html: listItemHTML, appendTo: list3 };
               }
-              await new Promise(resolve => setTimeout(resolve, 100));
-            });
-            await new Promise(resolve => setTimeout(resolve, 100));
+              return { html: listItemHTML, appendTo: list3 };
+            } else if (isSys(domain)) {
+              return { html: listItemHTML, appendTo: list2 };
+            } else {
+              return { html: listItemHTML, appendTo: list1 };
+            }
           });
-          await new Promise(resolve => setTimeout(resolve, 100));
+
+          listItemsHTML.forEach(item => {
+            item.appendTo.innerHTML += item.html;
+          });
+
           const handleClick = (target) => {
             const dmnID = `${target.id.replace('subdomain-', '')}`;
-                const domain = listItems.dmnID;
-                if (isOfficial(domain)) {
-                    window.open(link, "_blank");
-                } else {
-                    document.body.innerHTML += redirectWarning(domain, `agree-${dmnID}`, `close-${dmnID}`);
-                    document.getElementById(`agree-${dmnID}`).addEventListener("click", () => {
-                        window.open(link, "_blank");
-                        window.location.reload();
-                    });
-                    document.getElementById(`close-${dmnID}`).addEventListener("click", () => {
-                        window.location.reload();
-                    });
-                }
+            const domain = listItems[dmnID];
+            if (isOfficial(domain)) {
+              window.open(link, "_blank");
+            } else {
+              document.body.innerHTML += redirectWarning(domain, `agree-${dmnID}`, `close-${dmnID}`);
+              document.getElementById(`agree-${dmnID}`).addEventListener("click", () => {
+                window.open(link, "_blank");
+                window.location.reload();
+              });
+              document.getElementById(`close-${dmnID}`).addEventListener("click", () => {
+                window.location.reload();
+              });
+            }
           }
-          list1.addEventListener('click', (event) => {
-            const target = event.target.closest('.subdomain-link');
-            if (target) handleClick(target);
-          });
-          list2.addEventListener('click', (event) => {
-            const target = event.target.closest('.subdomain-link');
-            if (target) handleClick(target);
-          });
-          list3.addEventListener('click', (event) => {
-            const target = event.target.closest('.subdomain-link');
-            if (target) handleClick(target);
-          });
+
+          const addEventListeners = (list) => {
+            list.addEventListener('click', (event) => {
+              const target = event.target.closest('.subdomain-link');
+              if (target) handleClick(target);
+            });
+          };
+
+          addEventListeners(list1);
+          addEventListeners(list2);
+          addEventListeners(list3);
         })
         .catch(error => throwNewError(`Error fetching data: ${error}`));
     } catch (error) {
@@ -231,7 +201,7 @@ const Home = () => {
 
   return (
     <div>
-        <div class="NOT-A DISCLAIMER THIS-IS-HEADER">
+        <div className="NOT-A DISCLAIMER THIS-IS-HEADER">
             <img alt="Domains Count" src="https://img.shields.io/github/directory-file-count/is-a-dev/register/domains?color=6e3bf3&amp;label=domains&amp;style=for-the-badge" width="106" height="31" />
             <h1>
                 js.is-a.dev
