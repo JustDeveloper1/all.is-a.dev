@@ -83,7 +83,7 @@ const Home = () => {
       for (let i = 0; i < data.length; i += chunkSize) {
         const chunk = data.slice(i, i + chunkSize);
         chunk.forEach(item => {
-          // Process each item...
+          // do nothing (lmao)
         });
         await new Promise(resolve => setTimeout(resolve, 100));
       }
