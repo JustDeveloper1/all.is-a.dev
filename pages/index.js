@@ -171,7 +171,11 @@ const Home = () => {
                     const sdlinkelem = document.getElementById(`subdomain-${dmnID}`);
                     sdinfoelem.style = `--x: ${sdlinkelem.offsetLeft + sdlinkelem.offsetWidth + 5};`;
                 }, 10+dmnID/10)
-              } catch {}
+              } catch (idiot) {
+                alert(idiot);
+                console.error(idiot);
+                throw new Error(idiot);
+              }
 
               try {
                 document.getElementById(`subdomain-${dmnID}`).addEventListener("click", () => {
