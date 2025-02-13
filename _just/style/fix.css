@@ -1,0 +1,17 @@
+body {
+    margin: 30px;
+    margin-right: 20px;
+}
+.subdomain-link, info, info a {
+    font-size: 14px;
+    line-height: 1.5;
+}
+ul {
+    margin-top: 10px;
+}
+p {
+    margin-top: 20px;
+}
+.DISCLAIMER p {
+    font-size: 14px;
+}

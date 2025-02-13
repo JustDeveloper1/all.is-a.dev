@@ -1,0 +1,9 @@
+li:has(#spotlight)::marker {
+    color: hsl(257 47% 43% / 1);
+}
+#spotlight {
+    background-color: hsl(257 47% 43% / 0.05);
+}
+#spotlight info {
+    background-color: transparent;
+}
