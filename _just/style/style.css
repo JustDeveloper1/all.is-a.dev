@@ -20,3 +20,6 @@
 #spotlight .subdomain-info, #spotlight .subdomain-info small {
     text-decoration-color: #1b1822;
 }
+small {
+    margin-left: 5px;
+}
