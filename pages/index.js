@@ -146,6 +146,10 @@ const Home = () => {
         title = "The root domain (is-a.dev)"
       }
     }
+    if (domain === "all.is-a.dev") {
+      ptag2 = 'a';
+      tag2p = `class="subdomain-link" target="_self" title="${description}" href="${link}"`;
+    }
     const tag2 = `${ptag2} ${tag2p}`;
     const sdinfotitle = `(${domain.replace('@.', '')}) #${id + 1}`;
     let sdinfodomain = domain === `@.is-a.dev` ? '' : `(${domain})`;
