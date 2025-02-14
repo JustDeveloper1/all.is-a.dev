@@ -30,68 +30,72 @@ const Home = () => {
   const [listItems, setListItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const err = {
+    "noOwner1": "unknown",
+    "noOwner2": "unknown",
+  }
 
-    const spotlight = [
-      // to be spotlighted...
+  const spotlight = [
+    // to be spotlighted...
+  ];
+  const js_subdomains = [
+    "juststudio.is-a.dev",
+    "justdeveloper.is-a.dev",
+    "encoder.js.is-a.dev",
+    "all.is-a.dev"
+  ];
+  const js_partners = [
+    "kappy.is-a.dev",
+    "playreaver.is-a.dev",
+  ];
+  const maintainers = [
+    "cutedog5695.is-a.dev",
+    "iostpa.is-a.dev",
+    "orangc.is-a.dev",
+    "stefdp.is-a.dev",
+    "william.is-a.dev",
+    "21z.is-a.dev"
+  ];
+
+  const truncateString = (str, num) => {
+    return str.length > num ? str.slice(0, num) : str;
+  };
+
+  const truncateString2 = (str, num) => {
+    let output__ = truncateString(str, num - 3);
+    if (str !== output__) {
+      output__ += "...";
+    }
+    return output__;
+  };
+  
+  const isOfficial = (domain) => {
+    const offs = [
+      '@.is-a.dev',
+      'data.is-a.dev',
+      'docs.is-a.dev',
+      'owl.is-a.dev',
+      'raw-api.is-a.dev',
+      'register-bot.is-a.dev',
+      'team.is-a.dev',
+      'www.is-a.dev'
     ];
-    const js_subdomains = [
-      "juststudio.is-a.dev",
-      "justdeveloper.is-a.dev",
-      "encoder.js.is-a.dev",
-      "all.is-a.dev"
+    return (offs.some(off => off === domain));
+  };
+
+  const isSys = (domain) => {
+    const prefix = [
+      '_',
+      'zmail._domainkey'
     ];
-    const js_partners = [
-      "kappy.is-a.dev",
-      "playreaver.is-a.dev",
-    ];
-    const maintainers = [
-      "cutedog5695.is-a.dev",
-      "iostpa.is-a.dev",
-      "orangc.is-a.dev",
-      "stefdp.is-a.dev",
-      "william.is-a.dev",
-      "21z.is-a.dev"
-    ];
+    return (prefix.some(pfx => domain.startsWith(pfx)));
+  };
 
-    const truncateString = (str, num) => {
-      return str.length > num ? str.slice(0, num) : str;
-    };
+  const toBeSpotlighted = (domain) => {
+    return (spotlight.some(thing => thing === domain) || js_subdomains.some(subdomain => subdomain === domain) || js_partners.some(partner => partner === domain) || maintainers.some(one => one === domain));
+  };
 
-    const truncateString2 = (str, num) => {
-      let output__ = truncateString(str, num - 3);
-      if (str !== output__) {
-        output__ += "...";
-      }
-      return output__;
-    };
-
-    const isOfficial = (domain) => {
-      const offs = [
-        '@.is-a.dev',
-        'data.is-a.dev',
-        'docs.is-a.dev',
-        'owl.is-a.dev',
-        'raw-api.is-a.dev',
-        'register-bot.is-a.dev',
-        'team.is-a.dev',
-        'www.is-a.dev'
-      ];
-      return (offs.some(off => off === domain));
-    };
-
-    const isSys = (domain) => {
-      const prefix = [
-        '_',
-        'zmail._domainkey'
-      ];
-      return (prefix.some(pfx => domain.startsWith(pfx)));
-    };
-
-    const toBeSpotlighted = (domain) => {
-      return (spotlight.some(thing => thing === domain) || js_subdomains.some(subdomain => subdomain === domain) || js_partners.some(partner => partner === domain) || maintainers.some(one => one === domain));
-    };
-    
+  useEffect(() => {    
     const fetchData = async () => {
       try {
         const response = await fetch('https://raw-api.is-a.dev/');
@@ -100,7 +104,7 @@ const Home = () => {
         const processedItems = data.map((item, index) => {
           return {
             domain: item.domain,
-            owner: item.owner.username || 'smth went wrong 1',
+            owner: `@${item.owner.username}` || err.noOwner1,
             description: item.description || item.domain,
             id: index
           };
@@ -117,6 +121,36 @@ const Home = () => {
     fetchData();
   }, []);
 
+  const subdomain = (item) => {
+    const domain = item.domain;
+    let description = item.description;
+    const owner = item.owner.username || item.owner || err.noOwner2;
+    const profile = owner.toLowerCase();
+    const spotlight = toBeSpotlighted(domain);
+    const id = item.id;
+    description = encodeURIComponent(description)
+      .replaceAll('%20', ' ')
+      .replaceAll('%40', '@')
+      .replace(/%\w\w/g, "");
+    const link = `http://${domain}`;
+    let title = description; 
+    let tag1 = 'span';
+    let ptag2 = 'div';
+    let tag2p = `class="subdomain-link" id="subdomain-${id}" title="${description}"`
+    if (spotlight) {tag1 = 'span id="spotlight"'}
+    if (isOfficial(domain)) {
+      ptag2 = 'a';
+      tag2p = `class="subdomain-link" target="_blank" title="${description}" href="${link}"`;
+      if (domain === "@.is-a.dev") {
+        title = "The root domain (is-a.dev)"
+      }
+    }
+    const tag2 = `${ptag2} ${tag2p}`;
+    let sdinfo = desc !== domain ? `<div class="subdomain-info" id="info-${dmnID}">(${domain}) <small>#${dmnID}</small></div>` : `<div class="subdomain-info" id="info-${dmnID}"><small>#${dmnID}</small></div>`;
+    let output = `<${tag1}><${tag2}>${item.domain}</${ptag2}>${sdinfo}<info> by <a target="_blank" href="https://github.com/${profile}" title="@${owner} on GitHub">${owner}</a></info></span>`;
+    return ({output})
+  }
+
   return (
     <div>
       <h1>Subdomains</h1>
@@ -126,7 +160,7 @@ const Home = () => {
         <ul>
           {listItems.map(item => (
             <li key={item.id}>
-              <span>{`${item.domain} - ${item.description} by ${item.owner.username || item.owner || 'smth went wrong 2'}`}</span>
+              {subdomain(item)}
             </li>
           ))}
         </ul>
