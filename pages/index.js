@@ -184,40 +184,10 @@ const Home = () => {
     }
   }
 
-  const rndString = (num) => {
-    const a = Math.floor(Math.random() * Math.floor(Math.random() * 10000));
-    const b = a + Math.floor(Math.random() * Math.floor(Math.random() * 10000)) + (num || 1);
-    const c = b + Math.floor(Math.random() * Math.floor(Math.random() * 10000)) + (num || 1);
-    const d = (s) => String.fromCharCode(s);
-    const e = `${d(a)}${d(b)}${d(c)}`;
-    const f = encodeURIComponent(e).replaceAll('%', '').toLowerCase();
-    return f;
+  const clickEvent = (event) => {
+    const target = event.target.closest('.subdomain-link');
+    if (target) handleClick(target);
   }
-  let listId1 = rndString(1);
-  let listId2 = rndString(2);
-  let listId3 = rndString(3);
-  if (listId1 == listId2) {listId1 = `${listId1}${listId2}`}
-  if (listId1 == listId3) {listId1 = `${listId1}${listId3}`}
-  if (listId2 == listId1) {listId2 = `${listId2}${listId1}`}
-  if (listId2 == listId3) {listId2 = `${listId2}${listId3}`}
-  if (listId3 == listId2) {listId3 = `${listId3}${listId2}`}
-  if (listId3 == listId1) {listId3 = `${listId3}${listId1}`}
-  listId1 = `${listId1}1`;
-  listId2 = `${listId2}2`;
-  listId3 = `${listId3}3`;
-
-  document.getElementById(listId1).addEventListener('click', (event) => {
-    const target = event.target.closest('.subdomain-link');
-    if (target) handleClick(target);
-  });
-  document.getElementById(listId2).addEventListener('click', (event) => {
-    const target = event.target.closest('.subdomain-link');
-    if (target) handleClick(target);
-  });
-  document.getElementById(listId3).addEventListener('click', (event) => {
-    const target = event.target.closest('.subdomain-link');
-    if (target) handleClick(target);
-  });
 
   return (
     <>
@@ -245,7 +215,9 @@ const Home = () => {
       ) : (
         <>
           <p>Official Subdomains <small>(Check <a href="https://docs.is-a.dev/" target="_blank" title="is-a.dev documentation">https://docs.is-a.dev/</a>)</small></p>
-          <ul id={listId1}>
+          <ul
+            onClick={clickEvent}
+          >
             {listItems.map(item => {
               const sbdItem = subdomain(item, 1);
               if (sbdItem !== '') return (
@@ -259,7 +231,9 @@ const Home = () => {
             )})}
           </ul>
           <p>Subdomains</p>
-          <ul id={listId2}>
+          <ul
+            onClick={clickEvent}
+          >
             {listItems.map(item => {
               const sbdItem = subdomain(item, 2);
               if (sbdItem !== '') return (
@@ -273,7 +247,9 @@ const Home = () => {
             )})}
           </ul>
           <p>Subdomains that are most likely made for verifications</p>
-          <ul id={listId3}>
+          <ul
+            onClick={clickEvent}
+          >
             {listItems.map(item => {
               const sbdItem = subdomain(item, 3);
               if (sbdItem !== '') return (
