@@ -148,7 +148,7 @@ const Home = () => {
     const tag2 = `${ptag2} ${tag2p}`;
     let sdinfo = title !== domain ? `<div class="subdomain-info" id="info-${id}">(${domain}) <small>#${id}</small></div>` : `<div class="subdomain-info" id="info-${id}"><small>#${id}</small></div>`;
     let output = `<${tag1}><${tag2}>${title}</${ptag2}>${sdinfo}<info> by <a target="_blank" href="https://github.com/${profile}" title="@${owner} on GitHub">${owner}</a></info></span>`;
-    return ({output})
+    return output
   }
 
   return (
