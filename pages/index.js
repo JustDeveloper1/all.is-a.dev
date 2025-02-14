@@ -126,7 +126,7 @@ const Home = () => {
         <ul>
           {listItems.map(item => (
             <li key={item.id}>
-              <span>{`${item.domain} - ${item.description} by ${item.owner.username || 'smth went wrong 2'}`}</span>
+              <span>{`${item.domain} - ${item.description} by ${item.owner.username || item.owner || 'smth went wrong 2'}`}</span>
             </li>
           ))}
         </ul>
