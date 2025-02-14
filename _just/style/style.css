@@ -1,8 +1,19 @@
+.subdomain-link {
+    text-wrap-mode: nowrap;
+    flex-wrap: nowrap;
+    display: flex;
+    gap: 5px;
+    align-items: end;
+}
 .subdomain-info {
     font-size: 12px;
-    position: absolute;
-    left: var(--x);
+    text-decoration: underline;
+    text-decoration-color: #161616;
 }
 .subdomain-info, .subdomain-info small {
     color: #555555;
+    background-color: transparent;
+}
+#spotlight .subdomain-info, #spotlight .subdomain-info small {
+    text-decoration-color: #1b1822;
 }
