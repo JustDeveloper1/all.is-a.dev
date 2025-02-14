@@ -6,6 +6,7 @@
     align-items: end;
     max-width: 50%;
     overflow: hidden;
+    cursor: pointer;
 }
 .subdomain-info {
     font-size: 12px;

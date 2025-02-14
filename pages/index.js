@@ -147,7 +147,9 @@ const Home = () => {
       }
     }
     const tag2 = `${ptag2} ${tag2p}`;
-    let sdinfo = title !== domain ? `<div class="subdomain-info" id="info-${id}">(${domain}) <small>#${id}</small></div>` : `<div class="subdomain-info" id="info-${id}"><small>#${id}</small></div>`;
+    const sdinfotitle = `(${domain.replace('@.', '')}) #${id + 1}`;
+    let sdinfodomain = domain === `@.is-a.dev` ? '' : `(${domain})`;
+    let sdinfo = title !== domain ? `<div class="subdomain-info" id="info-${id}" title="${sdinfotitle}">${sdinfodomain}<small>#${id + 1}</small></div>` : `<div class="subdomain-info" id="info-${id}" title="${sdinfotitle}"><small>#${id + 1}</small></div>`;
     let output = `<${tag1}><${tag2}>${truncateString2(title, 50)}${sdinfo}</${ptag2}><info> by <a target="_blank" href="https://github.com/${profile.replace('@', '')}" title="${owner} on GitHub">${owner}</a></info></span>`;
     const isSystem = isSys(domain);
     if (listId == 1 && !isOff || listId == 3 && !isSystem || listId == 2 && (isOff || isSystem)) {
@@ -156,18 +158,79 @@ const Home = () => {
     return output
   }
 
+  const redirectWarning = (domain, aID, cID) => {
+    return `
+    <div class="WARNING">
+      <h1>WAIT!</h1>
+      <p><span>Are you sure you want to go to "<strong style="padding: 0px !important;">${domain}</strong>"?</span><br>We are not responsible for any content on "<strong style="padding: 0px !important;">${domain}</strong>".<br>They may collect your personal data, such as your IP address.<br>If you believe that "<strong style="padding: 0px !important;">${domain}</strong>" is violating <a href="https://github.com/is-a-dev/register/blob/main/TERMS_OF_SERVICE.md" target="_blank">is-a.dev's Terms Of Service</a>, you can <a href="https://github.com/is-a-dev/register/issues/new?labels=report-abuse&amp;template=report-abuse.md&amp;title=Report+abuse" target="_blank">report it here</a>.</p>
+      <main><button id="${aID || `agree`}">Yes, I want to go to "${domain}" anyway.</button><button id="${cID || `close`}">No, I want to stay here.</button></main>
+    </div>
+    `;
+  };
+  const handleClick = (target) => {
+    const dmnID = `${target.id.replace('subdomain-', '')}`;
+    const domain = listItems.dmnID;
+    if (isOfficial(domain)) {
+      window.open(link, "_blank");
+    } else {
+      document.body.innerHTML += redirectWarning(domain, `agree-${dmnID}`, `close-${dmnID}`);
+      document.getElementById(`agree-${dmnID}`).addEventListener("click", () => {
+        window.open(link, "_blank");
+        window.location.reload();
+      });
+      document.getElementById(`close-${dmnID}`).addEventListener("click", () => {
+        window.location.reload();
+      });
+    }
+  }
+
+  const rndString = (num) => {
+    const a = Math.floor(Math.random() * Math.floor(Math.random() * 10000));
+    const b = a + Math.floor(Math.random() * Math.floor(Math.random() * 10000)) + (num || 1);
+    const c = b + Math.floor(Math.random() * Math.floor(Math.random() * 10000)) + (num || 1);
+    const d = (s) => String.fromCharCode(s);
+    const e = `${d(a)}${d(b)}${d(c)}`;
+    const f = encodeURIComponent(e).replaceAll('%', '').toLowerCase();
+    return f;
+  }
+  let listId1 = rndString(1);
+  let listId2 = rndString(2);
+  let listId3 = rndString(3);
+  if (listId1 == listId2) {listId1 = `${listId1}${listId2}`}
+  if (listId1 == listId3) {listId1 = `${listId1}${listId3}`}
+  if (listId2 == listId1) {listId2 = `${listId2}${listId1}`}
+  if (listId2 == listId3) {listId2 = `${listId2}${listId3}`}
+  if (listId3 == listId2) {listId3 = `${listId3}${listId2}`}
+  if (listId3 == listId1) {listId3 = `${listId3}${listId1}`}
+  listId1 = `${listId1}1`;
+  listId2 = `${listId2}2`;
+  listId3 = `${listId3}3`;
+
+  document.getElementById(listId1).addEventListener('click', (event) => {
+    const target = event.target.closest('.subdomain-link');
+    if (target) handleClick(target);
+  });
+  document.getElementById(listId2).addEventListener('click', (event) => {
+    const target = event.target.closest('.subdomain-link');
+    if (target) handleClick(target);
+  });
+  document.getElementById(listId3).addEventListener('click', (event) => {
+    const target = event.target.closest('.subdomain-link');
+    if (target) handleClick(target);
+  });
+
   return (
     <>
       <div class="NOT-A DISCLAIMER THIS-IS-HEADER">
         <img alt="Domains Count" src="https://img.shields.io/github/directory-file-count/is-a-dev/register/domains?color=6e3bf3&amp;label=domains&amp;style=for-the-badge" width="106" height="31" />
         <h1>
-          js.is-a.dev
+          ------------
         </h1>
         <h1>
           all.is-a.dev
         </h1>
         <h1>
-          jd.is-a.dev
+          ------------
         </h1>
         <p>
           Every website on .is-a.dev
@@ -182,7 +245,7 @@ const Home = () => {
       ) : (
         <>
           <p>Official Subdomains <small>(Check <a href="https://docs.is-a.dev/" target="_blank" title="is-a.dev documentation">https://docs.is-a.dev/</a>)</small></p>
-          <ul>
+          <ul id={listId1}>
             {listItems.map(item => {
               const sbdItem = subdomain(item, 1);
               if (sbdItem !== '') return (
@@ -196,7 +259,7 @@ const Home = () => {
             )})}
           </ul>
           <p>Subdomains</p>
-          <ul>
+          <ul id={listId2}>
             {listItems.map(item => {
               const sbdItem = subdomain(item, 2);
               if (sbdItem !== '') return (
@@ -210,7 +273,7 @@ const Home = () => {
             )})}
           </ul>
           <p>Subdomains that are most likely made for verifications</p>
-          <ul>
+          <ul id={listId3}>
             {listItems.map(item => {
               const sbdItem = subdomain(item, 3);
               if (sbdItem !== '') return (
