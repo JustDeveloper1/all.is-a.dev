@@ -162,9 +162,13 @@ const Home = () => {
             }
           });console.log(listItemsHTML);
 
-          listItemsHTML.forEach(async item => {
-            try { item.appendTo.innerHTML += item.html; } catch {}
-          });
+          for (const item of listItemsHTML) {
+            try {
+              item.appendTo.innerHTML += item.html;
+            } catch (error) {
+              console.error(`Unable to visualize subdomain: ${error}`);
+            }
+          }
 
           const handleClick = (target) => {
             const dmnID = `${target.id.replace('subdomain-', '')}`;
