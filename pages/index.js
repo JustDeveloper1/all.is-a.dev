@@ -100,7 +100,7 @@ const Home = () => {
         const processedItems = data.map((item, index) => {
           return {
             domain: item.domain,
-            owner: item.owner.username,
+            owner: item.owner.username || 'smth went wrong 1',
             description: item.description || item.domain,
             id: index
           };
@@ -126,7 +126,7 @@ const Home = () => {
         <ul>
           {listItems.map(item => (
             <li key={item.id}>
-              <span>{item.domain} - {item.description} by {item.owner.username}</span>
+              <span>{item.domain} - {item.description} by {item.owner.username || 'smth went wrong 2'}</span>
             </li>
           ))}
         </ul>
