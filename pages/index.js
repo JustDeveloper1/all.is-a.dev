@@ -136,7 +136,7 @@ const Home = () => {
     let title = description; 
     let tag1 = 'span';
     let ptag2 = 'div';
-    let tag2p = `class="subdomain-link" id="subdomain-${id}" title="${description}"`;
+    let tag2p = `class="subdomain-link" id="subdomain-${id}" title="${description}" domain="${domain}"`;
     const isOff = isOfficial(domain);
     if (spotlight) {tag1 = 'span id="spotlight"'}
     if (isOff) {
@@ -169,7 +169,8 @@ const Home = () => {
   };
   const handleClick = (target) => {
     const dmnID = `${target.id.replace('subdomain-', '')}`;
-    const domain = listItems.dmnID;
+    const domain = target.getAttribute('domain');
+    const link = `http://${domain}`;
     if (isOfficial(domain)) {
       window.open(link, "_blank");
     } else {
@@ -186,7 +187,7 @@ const Home = () => {
 
   const clickEvent = (event) => {
     const target = event.target.closest('.subdomain-link');
-    if (target) handleClick(target);
+    if (target && target.getAttribute('domain')) handleClick(target);
   }
 
   return (
