@@ -126,7 +126,7 @@ const Home = () => {
         <ul>
           {listItems.map(item => (
             <li key={item.id}>
-              <span>{item.domain} - {item.description} by {item.owner}</span>
+              <span>{item.domain} - {item.description} by {item.owner.username}</span>
             </li>
           ))}
         </ul>
