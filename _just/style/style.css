@@ -4,6 +4,8 @@
     display: flex;
     gap: 5px;
     align-items: end;
+    max-width: 50%;
+    overflow: hidden;
 }
 .subdomain-info {
     font-size: 12px;
