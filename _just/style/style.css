@@ -23,3 +23,33 @@
 small {
     margin-left: 5px;
 }
+.DISCLAIMER:not(.THIS-IS-HEADER) {
+    max-width: 1045px;
+}
+@media(max-width: 600px) {
+    .THIS-IS-HEADER p, .THIS-IS-HEADER img {
+        display: none;
+    }
+}
+.c {
+    display: flex;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    padding-bottom: 5px;
+    padding-left: 30px;
+    padding-right: 20px;
+    padding-top: 5px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    align-content: flex-end;
+    backdrop-filter: blur(8px) saturate(0);
+    -webkit-backdrop-filter: blur(8px) saturate(0);
+    z-index: 1;
+}
+.c, .c *{
+    background-color: transparent !important;
+}
