@@ -26,12 +26,10 @@ SOFTWARE.
 
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl'
-import { useGlobalContext } from '@/global-context'
 
-const Home = (props) => {
+const Home = () => {
   const [listItems, setListItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { locale, locales } = useGlobalContext()
   const translate = useTranslations()
 
   const err = {
