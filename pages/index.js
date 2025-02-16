@@ -25,12 +25,12 @@ SOFTWARE.
 */
 
 import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl';
 
 const Home = () => {
   const [listItems, setListItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const translate = useTranslations()
+  const translate = useTranslations();
 
   const err = {
     "noOwner1": "unknown",

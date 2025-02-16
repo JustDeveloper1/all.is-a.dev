@@ -1,0 +1,27 @@
+{
+  "Index": {
+    "desc": "Every subdomain on .is-a.dev",
+    "load": "Loading...",
+    "offs": "Official Subdomains",
+    "offi": "See ",
+    "subd": "Subdomains",
+    "sysd": "Subdomains that are most likely made for verifications",
+    "disc": "DISCLAIMER",
+    "dis1": "This website is",
+    "dis2": "NOT",
+    "dis3": "claiming to be an official website/subdomain of is-a.dev. This is just a visualized version of",
+    "twos": "This website is open-source.",
+    "warn": "WAIT!",
+    "ques": "Are you sure you want to go to",
+    "info": "We are not responsible for any content on",
+    "inf0": "They may collect your personal data, such as your IP address.",
+    "inf1": "If you believe that",
+    "inf2": "is violating",
+    "inf3": "is-a.dev's Terms Of Service",
+    "inf4": "you can",
+    "inf5": "report it here",
+    "b1p1": "Yes, I want to go to",
+    "b1p2": " anyway.",
+    "b2p1": "No, I want to stay here."
+  }
+}
