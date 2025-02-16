@@ -225,7 +225,7 @@ const Home = () => {
         }} />
         <p>{translate.raw('dis1')} <strong style={{ textDecoration: 'underline', padding: '0px !important' }}>{translate.raw('dis2')}</strong> {translate.raw('dis3')} <a href="https://raw-api.is-a.dev/" target="_blank">raw-api.is-a.dev</a>.</p>
       </div>
-      {translate.raw('data')}
+      <div dangerouslySetInnerHTML={{__html:translate.raw('data'),}} />
       {loading ? (
         <p dangerouslySetInnerHTML={{
           __html:
