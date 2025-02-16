@@ -223,7 +223,7 @@ const Home = () => {
           __html:
             translate.raw('disc'),
         }} />
-        <p>${translate.raw('dis1')} <strong style={{ textDecoration: 'underline', padding: '0px !important' }}>${translate.raw('dis2')}</strong> ${translate.raw('dis3')} <a href="https://raw-api.is-a.dev/" target="_blank">raw-api.is-a.dev</a>.</p>
+        <p>{translate.raw('dis1')} <strong style={{ textDecoration: 'underline', padding: '0px !important' }}>{translate.raw('dis2')}</strong> {translate.raw('dis3')} <a href="https://raw-api.is-a.dev/" target="_blank">raw-api.is-a.dev</a>.</p>
       </div>
       {loading ? (
         <p dangerouslySetInnerHTML={{
@@ -232,7 +232,7 @@ const Home = () => {
         }} />
       ) : (
         <>
-          <p>${translate.raw('offs')} <small>(${translate.raw('offi')}<a href="https://docs.is-a.dev/" target="_blank" title="is-a.dev documentation">https://docs.is-a.dev/</a>)</small></p>
+          <p>{translate.raw('offs')} <small>({translate.raw('offi')}<a href="https://docs.is-a.dev/" target="_blank" title="is-a.dev documentation">https://docs.is-a.dev/</a>)</small></p>
           <ul
             onClick={clickEvent}
           >
