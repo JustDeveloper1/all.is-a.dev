@@ -143,7 +143,7 @@ const Home = () => {
     if (spotlight) {tag1 = 'span id="spotlight"'}
     if (isOff) {
       ptag2 = 'a';
-      tag2p = `class="subdomain-link" target="_blank" title="${description}" href="${link}"`;
+      tag2p = `class="subdomain-link" target="_blank" title="${description}" href="${link.replace('@.', '')}"`;
       if (domain === "@.is-a.dev") {
         title = `${translate.raw('root')} (is-a.dev)`
       }
