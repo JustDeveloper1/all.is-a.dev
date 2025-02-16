@@ -22,6 +22,8 @@
   "inf5": "report it here",
   "b1p1": "Yes, I want to go to",
   "b1p2": " anyway.",
-  "b2p1": "No, I want to stay here."
+  "b2p1": "No, I want to stay here.",
+  "root": "The root domain",
+  "data": "<small><a href=\"/ru\" target=\"_blank\" title=\"Переключить на русский язык\">Переключить на русский язык</a></small>"
 
 }

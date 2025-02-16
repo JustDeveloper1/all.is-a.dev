@@ -145,7 +145,7 @@ const Home = () => {
       ptag2 = 'a';
       tag2p = `class="subdomain-link" target="_blank" title="${description}" href="${link}"`;
       if (domain === "@.is-a.dev") {
-        title = "The root domain (is-a.dev)"
+        title = `${translate.raw('root')} (is-a.dev)`
       }
     }
     if (domain === "all.is-a.dev") {
@@ -225,6 +225,7 @@ const Home = () => {
         }} />
         <p>{translate.raw('dis1')} <strong style={{ textDecoration: 'underline', padding: '0px !important' }}>{translate.raw('dis2')}</strong> {translate.raw('dis3')} <a href="https://raw-api.is-a.dev/" target="_blank">raw-api.is-a.dev</a>.</p>
       </div>
+      {translate.raw('data')}
       {loading ? (
         <p dangerouslySetInnerHTML={{
           __html:
