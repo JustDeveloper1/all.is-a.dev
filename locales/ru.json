@@ -24,6 +24,6 @@
   "b1p2": "",
   "b2p1": "Нет, я хочу остаться тут.",
   "root": "Корневое доменное имя",
-  "data": "<small><a href=\"/\" target=\"_blank\" title=\"Switch to English language\">Switch to English language</a></small>"
+  "data": "<small><a href=\"/\" target=\"_self\" title=\"Переключить на английский язык\">Switch to English language</a></small><small><a href=\"https://github.com/JustDeveloper1/all.is-a.dev\" target=\"_blank\" title=\"Репозиторий в GitHub\">Пожалуйста, поставьте звёздочку на репозитории в GitHub</a></small>"
 
 }

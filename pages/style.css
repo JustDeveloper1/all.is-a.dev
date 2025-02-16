@@ -205,3 +205,11 @@ body, body * {
   .WARNING button, a, .subdomain-link {
     transition: 500ms;
   }
+  .i {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+  }

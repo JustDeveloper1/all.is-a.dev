@@ -24,6 +24,6 @@
   "b1p2": " anyway.",
   "b2p1": "No, I want to stay here.",
   "root": "The root domain",
-  "data": "<small><a href=\"/ru\" target=\"_blank\" title=\"Переключить на русский язык\">Переключить на русский язык</a></small>"
+  "data": "<small><a href=\"/ru\" target=\"_self\" title=\"Switch to Russian language\">Переключить на русский язык</a></small><small><a href=\"https://github.com/JustDeveloper1/all.is-a.dev\" target=\"_blank\" title=\"GitHub repository\">Star on GitHub</a></small>"
 
 }
