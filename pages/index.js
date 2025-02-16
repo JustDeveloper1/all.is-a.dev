@@ -30,7 +30,7 @@ import { useTranslations } from 'next-intl';
 const Home = () => {
   const [listItems, setListItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const translate = useTranslations();
+  const translate = useTranslations("Index");
 
   const err = {
     "noOwner1": "unknown",
@@ -167,9 +167,9 @@ const Home = () => {
   const redirectWarning = (domain, aID, cID) => {
     return `
     <div class="WARNING">
-      <h1>${translate.raw('warn')}</h1>
-      <p><span>${translate.raw('ques')} "<strong style="padding: 0px !important;">${domain}</strong>"?</span><br>${translate.raw('info')} "<strong style="padding: 0px !important;">${domain}</strong>".<br>${translate.raw('inf0')}<br>${translate.raw('inf1')} "<strong style="padding: 0px !important;">${domain}</strong>" ${translate.raw('inf2')} <a href="https://github.com/is-a-dev/register/blob/main/TERMS_OF_SERVICE.md" target="_blank">${translate.raw('inf3')}</a>, ${translate.raw('inf4')} <a href="https://github.com/is-a-dev/register/issues/new?labels=report-abuse&amp;template=report-abuse.md&amp;title=Report+abuse" target="_blank">${translate.raw('inf5')}</a>.</p>
-      <main><button id="${aID || `agree`}">${translate.raw('b1p1')} "${domain}"${translate.raw('b1p2')}</button><button id="${cID || `close`}">${translate.raw('b2p1')}</button></main>
+      <h1>${translate('warn')}</h1>
+      <p><span>${translate('ques')} "<strong style="padding: 0px !important;">${domain}</strong>"?</span><br>${translate('info')} "<strong style="padding: 0px !important;">${domain}</strong>".<br>${translate('inf0')}<br>${translate('inf1')} "<strong style="padding: 0px !important;">${domain}</strong>" ${translate('inf2')} <a href="https://github.com/is-a-dev/register/blob/main/TERMS_OF_SERVICE.md" target="_blank">${translate('inf3')}</a>, ${translate('inf4')} <a href="https://github.com/is-a-dev/register/issues/new?labels=report-abuse&amp;template=report-abuse.md&amp;title=Report+abuse" target="_blank">${translate('inf5')}</a>.</p>
+      <main><button id="${aID || `agree`}">${translate('b1p1')} "${domain}"${translate('b1p2')}</button><button id="${cID || `close`}">${translate('b2p1')}</button></main>
     </div>
     `;
   };
@@ -199,7 +199,7 @@ const Home = () => {
   return (
     <>
       <div class="c">
-        <a href="https://github.com/JustDeveloper1/all.is-a.dev" target="_blank" dangerouslySetInnerHTML={{__html: translate.raw('twos')}} />
+        <a href="https://github.com/JustDeveloper1/all.is-a.dev" target="_blank" dangerouslySetInnerHTML={{__html: translate('twos')}} />
         <a href="https://github.com/JustDeveloper1/all.is-a.dev/blob/main/LICENSE" target="_blank">&copy; 2025 JustDeveloper</a>
       </div>
       <div class="NOT-A DISCLAIMER THIS-IS-HEADER">
@@ -215,24 +215,24 @@ const Home = () => {
         </h1>
         <p dangerouslySetInnerHTML={{
           __html:
-            translate.raw('desc'),
+            translate('desc'),
         }} />
       </div>
       <div className="DISCLAIMER">
         <h1 dangerouslySetInnerHTML={{
           __html:
-            translate.raw('disc'),
+            translate('disc'),
         }} />
-        <p>${translate.raw('dis1')} <strong style={{ textDecoration: 'underline', padding: '0px !important' }}>${translate.raw('dis2')}</strong> ${translate.raw('dis3')} <a href="https://raw-api.is-a.dev/" target="_blank">raw-api.is-a.dev</a>.</p>
+        <p>${translate('dis1')} <strong style={{ textDecoration: 'underline', padding: '0px !important' }}>${translate('dis2')}</strong> ${translate('dis3')} <a href="https://raw-api.is-a.dev/" target="_blank">raw-api.is-a.dev</a>.</p>
       </div>
       {loading ? (
         <p dangerouslySetInnerHTML={{
           __html:
-            translate.raw('load'),
+            translate('load'),
         }} />
       ) : (
         <>
-          <p>${translate.raw('offs')} <small>(${translate.raw('offi')}<a href="https://docs.is-a.dev/" target="_blank" title="is-a.dev documentation">https://docs.is-a.dev/</a>)</small></p>
+          <p>${translate('offs')} <small>(${translate('offi')}<a href="https://docs.is-a.dev/" target="_blank" title="is-a.dev documentation">https://docs.is-a.dev/</a>)</small></p>
           <ul
             onClick={clickEvent}
           >
@@ -250,7 +250,7 @@ const Home = () => {
           </ul>
           <p dangerouslySetInnerHTML={{
               __html:
-                translate.raw('subd'),
+                translate('subd'),
             }} />
           <ul
             onClick={clickEvent}
@@ -269,7 +269,7 @@ const Home = () => {
           </ul>
           <p dangerouslySetInnerHTML={{
               __html:
-                translate.raw('sysd'),
+                translate('sysd'),
             }} />
           <ul
             onClick={clickEvent}
