@@ -25,10 +25,14 @@ SOFTWARE.
 */
 
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl'
+import { useGlobalContext } from '@/global-context'
 
-const Home = () => {
+const Home = (props) => {
   const [listItems, setListItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { locale, locales } = useGlobalContext()
+  const translate = useTranslations()
 
   const err = {
     "noOwner1": "unknown",
@@ -114,7 +118,7 @@ const Home = () => {
         setLoading(false);
       } catch (error) {
         console.error(`Error fetching data: ${error}`);
-        alert(`Uh Oh! ${error}. Please try again later.`);
+        setTimeout(() => window.location.reload, 100);
       }
     };
 
@@ -165,9 +169,9 @@ const Home = () => {
   const redirectWarning = (domain, aID, cID) => {
     return `
     <div class="WARNING">
-      <h1>WAIT!</h1>
-      <p><span>Are you sure you want to go to "<strong style="padding: 0px !important;">${domain}</strong>"?</span><br>We are not responsible for any content on "<strong style="padding: 0px !important;">${domain}</strong>".<br>They may collect your personal data, such as your IP address.<br>If you believe that "<strong style="padding: 0px !important;">${domain}</strong>" is violating <a href="https://github.com/is-a-dev/register/blob/main/TERMS_OF_SERVICE.md" target="_blank">is-a.dev's Terms Of Service</a>, you can <a href="https://github.com/is-a-dev/register/issues/new?labels=report-abuse&amp;template=report-abuse.md&amp;title=Report+abuse" target="_blank">report it here</a>.</p>
-      <main><button id="${aID || `agree`}">Yes, I want to go to "${domain}" anyway.</button><button id="${cID || `close`}">No, I want to stay here.</button></main>
+      <h1>${translate.raw('warn')}</h1>
+      <p><span>${translate.raw('ques')} "<strong style="padding: 0px !important;">${domain}</strong>"?</span><br>${translate.raw('info')} "<strong style="padding: 0px !important;">${domain}</strong>".<br>${translate.raw('inf0')}<br>${translate.raw('inf1')} "<strong style="padding: 0px !important;">${domain}</strong>" ${translate.raw('inf2')} <a href="https://github.com/is-a-dev/register/blob/main/TERMS_OF_SERVICE.md" target="_blank">${translate.raw('inf3')}</a>, ${translate.raw('inf4')} <a href="https://github.com/is-a-dev/register/issues/new?labels=report-abuse&amp;template=report-abuse.md&amp;title=Report+abuse" target="_blank">${translate.raw('inf5')}</a>.</p>
+      <main><button id="${aID || `agree`}">${translate.raw('b1p1')} "${domain}"${translate.raw('b1p2')}</button><button id="${cID || `close`}">${translate.raw('b2p1')}</button></main>
     </div>
     `;
   };
@@ -197,7 +201,7 @@ const Home = () => {
   return (
     <>
       <div class="c">
-        <a href="https://github.com/JustDeveloper1/all.is-a.dev" target="_blank">This website is open-source.</a>
+        <a href="https://github.com/JustDeveloper1/all.is-a.dev" target="_blank" dangerouslySetInnerHTML={{__html: translate.raw('twos')}} />
         <a href="https://github.com/JustDeveloper1/all.is-a.dev/blob/main/LICENSE" target="_blank">&copy; 2025 JustDeveloper</a>
       </div>
       <div class="NOT-A DISCLAIMER THIS-IS-HEADER">
@@ -211,19 +215,26 @@ const Home = () => {
         <h1>
           ------------
         </h1>
-        <p>
-          Every website on .is-a.dev
-        </p>
+        <p dangerouslySetInnerHTML={{
+          __html:
+            translate.raw('desc'),
+        }} />
       </div>
       <div className="DISCLAIMER">
-        <h1>DISCLAIMER</h1>
-        <p>This website is <strong style={{ textDecoration: 'underline', padding: '0px !important' }}>NOT</strong> claiming to be an official website/subdomain of is-a.dev. This is just a visualized version of <a href="https://raw-api.is-a.dev/" target="_blank">raw-api.is-a.dev</a>.</p>
+        <h1 dangerouslySetInnerHTML={{
+          __html:
+            translate.raw('disc'),
+        }} />
+        <p>${translate.raw('dis1')} <strong style={{ textDecoration: 'underline', padding: '0px !important' }}>${translate.raw('dis2')}</strong> ${translate.raw('dis3')} <a href="https://raw-api.is-a.dev/" target="_blank">raw-api.is-a.dev</a>.</p>
       </div>
       {loading ? (
-        <p>Loading...</p>
+        <p dangerouslySetInnerHTML={{
+          __html:
+            translate.raw('load'),
+        }} />
       ) : (
         <>
-          <p>Official Subdomains <small>(Check <a href="https://docs.is-a.dev/" target="_blank" title="is-a.dev documentation">https://docs.is-a.dev/</a>)</small></p>
+          <p>${translate.raw('offs')} <small>(${translate.raw('offi')}<a href="https://docs.is-a.dev/" target="_blank" title="is-a.dev documentation">https://docs.is-a.dev/</a>)</small></p>
           <ul
             onClick={clickEvent}
           >
@@ -239,7 +250,10 @@ const Home = () => {
               </li>
             )})}
           </ul>
-          <p>Subdomains</p>
+          <p dangerouslySetInnerHTML={{
+              __html:
+                translate.raw('subd'),
+            }} />
           <ul
             onClick={clickEvent}
           >
@@ -255,7 +269,10 @@ const Home = () => {
               </li>
             )})}
           </ul>
-          <p>Subdomains that are most likely made for verifications</p>
+          <p dangerouslySetInnerHTML={{
+              __html:
+                translate.raw('sysd'),
+            }} />
           <ul
             onClick={clickEvent}
           >
