@@ -65,13 +65,21 @@ const Home = () => {
     "kappy.is-a.dev",
     "playreaver.is-a.dev",
   ];
+  
   const maintainers = [
+    
     "cutedog5695.is-a.dev",
     "iostpa.is-a.dev",
+
     "orangc.is-a.dev",
+    "c.is-a.dev",
+
     "stefdp.is-a.dev",
+
     "william.is-a.dev",
+
     // "21z.is-a.dev" // Removed from list because 21Z dont use it (there is no website on 21z.is-a.dev).
+
   ];
 
   const truncateString = (str, num) => {
