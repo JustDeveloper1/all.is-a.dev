@@ -68,19 +68,33 @@ const Home = () => {
   
   const maintainers = [
     
+    // iostpa
     "cutedog5695.is-a.dev",
     "iostpa.is-a.dev",
 
+    // orangc
     "orangc.is-a.dev",
     "c.is-a.dev",
 
+    // Stef
     "stefdp.is-a.dev",
 
+    // William
     "william.is-a.dev",
 
+    // 21Z
     // "21z.is-a.dev" // Removed from list because 21Z dont use it (there is no website on 21z.is-a.dev).
 
   ];
+  const helpers = [
+
+    // DevMatei
+    "devmatei.is-a.dev",
+
+    // MaskDuck , where my degen role that you gived me long time ago when you were maintainer????????????????????????????????????????????
+    "maskduck.is-a.dev"
+
+  ]
 
   const truncateString = (str, num) => {
     return str.length > num ? str.slice(0, num) : str;
@@ -117,7 +131,13 @@ const Home = () => {
   };
 
   const toBeSpotlighted = (domain) => {
-    return (spotlight.some(thing => thing === domain) || js_subdomains.some(subdomain => subdomain === domain) || js_partners.some(partner => partner === domain) || maintainers.some(one => one === domain));
+    return (
+      spotlight.some(thing => thing === domain) || 
+      js_subdomains.some(subdomain => subdomain === domain) || 
+      js_partners.some(partner => partner === domain) || 
+      maintainers.some(one => one === domain) || 
+      helpers.some(help => help === domain)
+    );
   };
   const toBeSuperSpotlighted = (domain) => {
     return (superspotlight.some(thing => thing === domain));
