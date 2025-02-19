@@ -44,6 +44,7 @@ const Home = () => {
 
   // list of the best websites
   const superspotlight = [
+    "heatblock.esb.is-a.dev"
     // to be superspotlighted...
   ]
 
