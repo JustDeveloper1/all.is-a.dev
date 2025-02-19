@@ -48,6 +48,13 @@ const Home = () => {
     // to be superspotlighted...
   ]
 
+  const specials = [
+    {
+      "d": "hate.is-a.dev",
+      "c": "#e2155b"
+    }
+  ]
+
   const js_subdomains = [
     "juststudio.is-a.dev",
     "justdeveloper.is-a.dev",
@@ -107,6 +114,18 @@ const Home = () => {
   const toBeSuperSpotlighted = (domain) => {
     return (superspotlight.some(thing => thing === domain));
   };
+
+  const getSpecialParams = (domain) => {
+    let retrn = '';
+    specials.some(special => {
+      const specialdomain = special.d;
+      const specialcolour = special.c;
+      if (domain === specialdomain) {
+        retrn = ` style="color: ${specialcolour} !important;" `;
+      }
+    })
+    return retrn
+  }
 
   useEffect(() => {    
     const fetchData = async () => {
@@ -171,8 +190,9 @@ const Home = () => {
     const tag2 = `${ptag2} ${tag2p}`;
     const sdinfotitle = `(${domain.replace('@.', '')}) #${id + 1}`;
     let sdinfodomain = domain === `@.is-a.dev` ? '' : `(${domain})`;
-    let sdinfo = title !== domain ? `<div class="subdomain-info" id="info-${id}" title="${sdinfotitle}">${sdinfodomain}<small>#${id + 1}</small></div>` : `<div class="subdomain-info" id="info-${id}" title="${sdinfotitle}"><small>#${id + 1}</small></div>`;
-    let output = `<${tag1}><${tag2}>${truncateString2(title, 50)}${sdinfo}</${ptag2}><info> ${by} <a target="_blank" href="https://github.com/${profile.replace('@', '')}" title="${owner} ${og}">${owner}</a></info></span>`;
+    const specialstyle = getSpecialParams(domain);
+    let sdinfo = title !== domain ? `<div class="subdomain-info" id="info-${id}" title="${sdinfotitle}"${specialstyle}>${sdinfodomain}<small${specialstyle}>#${id + 1}</small></div>` : `<div class="subdomain-info" id="info-${id}" title="${sdinfotitle}"><small${specialstyle}>#${id + 1}</small></div>`;
+    let output = `<${tag1}${specialstyle}><${tag2}${specialstyle}>${truncateString2(title, 50)}${sdinfo}</${ptag2}><info${specialstyle}> ${by} <a target="_blank" href="https://github.com/${profile.replace('@', '')}" title="${owner} ${og}"${specialstyle}>${owner}</a></info></span>`;
     const isSystem = isSys(domain);
     if (listId == 1 && !isOff || listId == 3 && !isSystem || listId == 2 && (isOff || isSystem)) {
       output = '';
