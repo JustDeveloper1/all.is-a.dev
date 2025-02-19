@@ -213,3 +213,15 @@ body, body * {
     justify-content: space-between;
     align-items: center;
   }
+
+.DISCLAIMER {
+    transition: 1.5s
+}
+@media(max-width: 1115px) {
+    .DISCLAIMER:not(.NOT-A) {
+        border-top-right-radius: 0px !important;
+    }
+    .THIS-IS-HEADER {
+        border-bottom-right-radius: 0px !important;
+    }
+}

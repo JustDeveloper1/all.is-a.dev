@@ -37,9 +37,16 @@ const Home = () => {
     "noOwner2": "unknown",
   }
 
+  // list of websites that you should look at
   const spotlight = [
     // to be spotlighted...
   ];
+
+  // list of the best websites
+  const superspotlight = [
+    // to be superspotlighted...
+  ]
+
   const js_subdomains = [
     "juststudio.is-a.dev",
     "justdeveloper.is-a.dev",
@@ -56,7 +63,7 @@ const Home = () => {
     "orangc.is-a.dev",
     "stefdp.is-a.dev",
     "william.is-a.dev",
-    "21z.is-a.dev"
+    // "21z.is-a.dev" // Removed from list because 21Z dont use it (there is no website on 21z.is-a.dev).
   ];
 
   const truncateString = (str, num) => {
@@ -96,6 +103,9 @@ const Home = () => {
   const toBeSpotlighted = (domain) => {
     return (spotlight.some(thing => thing === domain) || js_subdomains.some(subdomain => subdomain === domain) || js_partners.some(partner => partner === domain) || maintainers.some(one => one === domain));
   };
+  const toBeSuperSpotlighted = (domain) => {
+    return (superspotlight.some(thing => thing === domain));
+  };
 
   useEffect(() => {    
     const fetchData = async () => {
@@ -123,12 +133,16 @@ const Home = () => {
     fetchData();
   }, []);
 
+  const by = translate.raw('bbyy');
+  const og = translate.raw('ongh');
+
   const subdomain = (item, listId) => {
     const domain = item.domain;
     let description = item.description;
     const owner = item.owner.username || item.owner || err.noOwner2;
     const profile = owner.toLowerCase();
     const spotlight = toBeSpotlighted(domain);
+    const superspotlight = toBeSuperSpotlighted(domain);
     const id = item.id;
     description = encodeURIComponent(description)
       .replaceAll('%20', ' ')
@@ -140,7 +154,7 @@ const Home = () => {
     let ptag2 = 'div';
     let tag2p = `class="subdomain-link" id="subdomain-${id}" title="${description}" domain="${domain}"`;
     const isOff = isOfficial(domain);
-    if (spotlight) {tag1 = 'span id="spotlight"'}
+    if (spotlight) {tag1 = 'span id="spotlight"'} else if (superspotlight) {tag1 = 'span id="spotlight" class="superspotlight"'}
     if (isOff) {
       ptag2 = 'a';
       tag2p = `class="subdomain-link" target="_blank" title="${description}" href="${link.replace('@.', '')}"`;
@@ -151,12 +165,13 @@ const Home = () => {
     if (domain === "all.is-a.dev") {
       ptag2 = 'a';
       tag2p = `class="subdomain-link" target="_self" title="${description}" href="${link}"`;
+      tag1 = 'span id="spotlight" class="superspotlight"';
     }
     const tag2 = `${ptag2} ${tag2p}`;
     const sdinfotitle = `(${domain.replace('@.', '')}) #${id + 1}`;
     let sdinfodomain = domain === `@.is-a.dev` ? '' : `(${domain})`;
     let sdinfo = title !== domain ? `<div class="subdomain-info" id="info-${id}" title="${sdinfotitle}">${sdinfodomain}<small>#${id + 1}</small></div>` : `<div class="subdomain-info" id="info-${id}" title="${sdinfotitle}"><small>#${id + 1}</small></div>`;
-    let output = `<${tag1}><${tag2}>${truncateString2(title, 50)}${sdinfo}</${ptag2}><info> by <a target="_blank" href="https://github.com/${profile.replace('@', '')}" title="${owner} on GitHub">${owner}</a></info></span>`;
+    let output = `<${tag1}><${tag2}>${truncateString2(title, 50)}${sdinfo}</${ptag2}><info> ${by} <a target="_blank" href="https://github.com/${profile.replace('@', '')}" title="${owner} ${og}">${owner}</a></info></span>`;
     const isSystem = isSys(domain);
     if (listId == 1 && !isOff || listId == 3 && !isSystem || listId == 2 && (isOff || isSystem)) {
       output = '';

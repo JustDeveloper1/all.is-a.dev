@@ -33,3 +33,61 @@ li:has(#spotlight)::marker {
 #spotlight info {
     background-color: transparent;
 }
+
+li:has(.superspotlight) {
+    animation: superspotlight 10s linear infinite;
+    --b: 1.5;
+    --s: drop-shadow(0px 0px 50px #6e3bf3);
+    background-color: transparent;
+}
+li:has(.superspotlight)::marker {
+    color: #6e3bf3 !important;
+}
+.superspotlight {
+    overflow: hidden;
+    border-color: #6e3bf3 !important;
+}
+.superspotlight:after {
+    content: '';
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    width: 25%;
+    height: 100%;
+    background-color: hsl(288 88% 59% / 1);
+    z-index: -1;
+    filter: blur(100px);
+    -webkit-filter: blur(100px);
+}
+.superspotlight:before {
+    content: '';
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 25%;
+    height: 100%;
+    background-color: hsl(243 88% 59% / 1);
+    z-index: -1;
+    filter: blur(100px);
+    -webkit-filter: blur(100px);
+}
+@keyframes superspotlight {
+    from {
+        filter: var(--s) hue-rotate(0deg) brightness(var(--b)) !important;
+        -webkit-filter: var(--s) hue-rotate(0deg) brightness(var(--b));
+    }
+    to {
+        filter: var(--s) hue-rotate(359deg) brightness(var(--b)) !important;
+        -webkit-filter: var(--s) hue-rotate(359deg) brightness(var(--b));
+    }
+}
+@-webkit-keyframes superspotlight {
+    from {
+        filter: var(--s) hue-rotate(0deg) brightness(var(--b)) !important;
+        -webkit-filter: var(--s) hue-rotate(0deg) brightness(var(--b));
+    }
+    to {
+        filter: var(--s) hue-rotate(359deg) brightness(var(--b)) !important;
+        -webkit-filter: var(--s) hue-rotate(359deg) brightness(var(--b));
+    }
+}
