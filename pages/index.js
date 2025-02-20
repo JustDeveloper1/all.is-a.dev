@@ -39,6 +39,7 @@ const Home = () => {
 
   // list of websites that you should look at
   const spotlight = [
+    "miteigi.is-a.dev"
     // to be spotlighted...
   ];
 
