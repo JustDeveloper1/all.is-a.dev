@@ -30,6 +30,7 @@ import { useTranslations } from 'next-intl';
 const Home = () => {
   const [listItems, setListItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [failed, setFailed] = useState(false);
   const translate = useTranslations();
 
   const err = {
@@ -176,6 +177,8 @@ const Home = () => {
       } catch (error) {
         console.error(`Error fetching data: ${error}`);
         setTimeout(() => window.location.reload, 100);
+        setLoading(false);
+        setFailed(true);
       }
     };
 
@@ -184,6 +187,7 @@ const Home = () => {
 
   const by = translate.raw('bbyy');
   const og = translate.raw('ongh');
+  const currentLocation = window.location.pathname || '/';
 
   const subdomain = (item, listId) => {
     const domain = item.domain;
@@ -213,7 +217,7 @@ const Home = () => {
     }
     if (domain === "all.is-a.dev") {
       ptag2 = 'a';
-      tag2p = `class="subdomain-link" target="_self" title="${description}" href="${link}"`;
+      tag2p = `class="subdomain-link" target="_self" title="${description}" href="${currentLocation}"`;
       tag1 = 'span id="spotlight" class="superspotlight"';
     }
     const tag2 = `${ptag2} ${tag2p}`;
@@ -296,6 +300,17 @@ const Home = () => {
           __html:
             translate.raw('load'),
         }} />
+      ) : failed ? (
+        <div class="e" all_is-a_dev___data="error">
+          <p dangerouslySetInnerHTML={{
+            __html:
+              translate.raw('eftf')
+          }} />
+          <a href={currentLocation} target="_self" dangerouslySetInnerHTML={{
+            __html:
+              translate.raw('retr')
+          }} />
+        </div>
       ) : (
         <>
           <p>{translate.raw('offs')} <small>({translate.raw('offi')}<a href="https://docs.is-a.dev/" target="_blank" title="is-a.dev documentation">https://docs.is-a.dev/</a>)</small></p>
