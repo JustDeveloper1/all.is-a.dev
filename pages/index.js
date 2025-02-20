@@ -26,12 +26,14 @@ SOFTWARE.
 
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/router';
 
 const Home = () => {
   const [listItems, setListItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [failed, setFailed] = useState(false);
   const translate = useTranslations();
+  const router = useRouter();
 
   const err = {
     "noOwner1": "unknown",
@@ -187,7 +189,7 @@ const Home = () => {
 
   const by = translate.raw('bbyy');
   const og = translate.raw('ongh');
-  const currentLocation = window.location.pathname || '/';
+  const currentLocation = router.pathname || '/';
 
   const subdomain = (item, listId) => {
     const domain = item.domain;
