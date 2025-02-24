@@ -127,11 +127,13 @@ const Home = () => {
   };
 
   const isSys = (domain) => {
-    const prefix = [
-      '_',
-      'zmail._domainkey'
-    ];
-    return (prefix.some(pfx => domain.startsWith(pfx)));
+      const regex = /^.*\._domainkey\..*$/;
+      const prefix = [
+        '_',
+        'clerk',
+        'clkmail'
+      ];
+      return (prefix.some(pfx => domain.startsWith(pfx)) || regex.test(domain));
   };
 
   const toBeSpotlighted = (domain) => {
