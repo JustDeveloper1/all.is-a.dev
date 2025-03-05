@@ -100,6 +100,15 @@ const Home = () => {
     "maskduck.is-a.dev"
 
   ]
+  const verified = [ // will be filled and used soon
+    // is-a.dev
+    "is-a-dev",
+    // Maintainers
+    "",
+    // Helpers
+    "",
+  ]
+  const badge = `<img src="https://all.is-a.dev/img/verified.svg"></img>`;
 
   const truncateString = (str, num) => {
     return str.length > num ? str.slice(0, num) : str;
