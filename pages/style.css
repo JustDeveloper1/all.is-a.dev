@@ -259,3 +259,16 @@ html:has([all_is-a_dev___data="error"]) {
       z-index: 2;
   }
 }
+
+info img {
+  height: 21px;
+  width: 21px;
+  background: transparent;
+  border-radius: 50%;
+  filter: drop-shadow(0px 0px 2px #6e3bf3a3);
+  -webkit-filter: drop-shadow(0px 0px 2px #6e3bf3a3);
+  pointer-events: none;
+}
+@media(max-width: 1000px){info img{
+  display: none;
+}}
