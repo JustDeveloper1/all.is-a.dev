@@ -242,7 +242,7 @@ const Home = () => {
     let sdinfo = title !== domain ? `<div class="subdomain-info" id="info-${id}" title="${sdinfotitle}"${specialstyle}>${sdinfodomain}<small${specialstyle}>#${id + 1}</small></div>` : `<div class="subdomain-info" id="info-${id}" title="${sdinfotitle}"><small${specialstyle}>#${id + 1}</small></div>`;
     let output = `<${tag1}${specialstyle}><${tag2}${specialstyle}>${truncateString2(title, 50)}${sdinfo}</${ptag2}><info${specialstyle}> ${by} <a target="_blank" href="https://github.com/${profile.replace('@', '')}" title="${owner} ${og}"${specialstyle}>${owner}</a></info></span>`;
     const isSystem = isSys(domain);
-    if (listId == 1 && !isOff || listId == 3 && !isSystem || listId == 2 && (isOff || isSystem)) {
+    if (listId == 1 && !isOff || listId == 3 && !isSystem || listId == 2 && (isOff || isSystem) || (listId == 4 && !isAPI(domain))) {
       output = '';
     }
     return output
@@ -353,6 +353,25 @@ const Home = () => {
           >
             {listItems.map(item => {
               const sbdItem = subdomain(item, 2);
+              if (sbdItem !== '') return (
+              <li key={item.id}
+                dangerouslySetInnerHTML={{
+                  __html:
+                    sbdItem,
+                }}
+              >
+              </li>
+            )})}
+          </ul>
+          <p dangerouslySetInnerHTML={{
+              __html:
+                translate.raw('apis'),
+            }} />
+          <ul
+            onClick={clickEvent}
+          >
+            {listItems.map(item => {
+              const sbdItem = subdomain(item, 4);
               if (sbdItem !== '') return (
               <li key={item.id}
                 dangerouslySetInnerHTML={{
