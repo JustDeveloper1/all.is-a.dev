@@ -100,15 +100,17 @@ const Home = () => {
     "maskduck.is-a.dev"
 
   ]
-  const verified = [ // will be filled and used soon
-    // is-a.dev
+  const verified = [
     "is-a-dev",
-    // Maintainers
-    "",
-    // Helpers
-    "",
   ]
-  const badge = `<img src="https://all.is-a.dev/img/verified.svg"></img>`;
+  const maintainers0 = [
+    
+  ]
+  const badge = {
+    verified: `<img src="https://all.is-a.dev/img/verified.svg"></img>`,
+    maintainer: `<img src="https://all.is-a.dev/img/maintainer.webp"></img>`,
+    helper: `<img src="https://all.is-a.dev/img/helper.webp"></img>`
+  };
 
   const truncateString = (str, num) => {
     return str.length > num ? str.slice(0, num) : str;
@@ -137,14 +139,25 @@ const Home = () => {
   };
 
   const isSys = (domain) => {
-      const regex = /^.*\._domainkey\..*$/;
-      const prefix = [
-        '_',
-        'clerk',
-        'clkmail'
-      ];
-      return (prefix.some(pfx => domain.startsWith(pfx)) || regex.test(domain));
+    const regex = /^.*\._domainkey\..*$/;
+    const prefix = [
+      '_',
+      'clerk.',
+      'clkmail.',
+    ];
+    return (prefix.some(pfx => domain.startsWith(pfx)) || regex.test(domain));
   };
+
+  const isAPI = (domain) => {
+    const prefix = [
+      'analytics.',
+      'api.',
+      'playeranalytics.',
+      'server.',
+      'tunnel.',
+    ]
+    return (prefix.some(pfx => domain.startsWith(pfx)));
+  }
 
   const toBeSpotlighted = (domain) => {
     return (
