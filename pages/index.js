@@ -100,22 +100,10 @@ const Home = () => {
     "maskduck.is-a.dev"
 
   ]
-  const verified = [
-    "is-a-dev",
-  ]
-  const maintainers0 = [
-    
-  ]
-  const badge = {
-    verified: `<img src="https://all.is-a.dev/img/verified.svg"></img>`,
-    maintainer: `<img src="https://all.is-a.dev/img/maintainer.webp"></img>`,
-    helper: `<img src="https://all.is-a.dev/img/helper.webp"></img>`
-  };
 
   const truncateString = (str, num) => {
     return str.length > num ? str.slice(0, num) : str;
   };
-
   const truncateString2 = (str, num) => {
     let output__ = truncateString(str, num - 3);
     if (str !== output__) {
