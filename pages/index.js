@@ -176,7 +176,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const response = await fetch('https://raw.is-a.dev/');
-        const data = await response.json();
+        const data = (await response.json()).filter(d => !d.reserved);
         
         const processedItems = data.map((item, index) => {
           return {
