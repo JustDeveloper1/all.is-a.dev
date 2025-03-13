@@ -234,7 +234,7 @@ const Home = () => {
     if (domain === "all.is-a.dev") {
       ptag2 = 'a';
       tag2p = `class="subdomain-link" target="_self" title="${description}" href="${currentLocation}"`;
-      tag1 = 'span id="spotlight" class="superspotlight"';
+      tag1 = 'span id="spotlight" class="thiswebsite"';
     }
     const tag2 = `${ptag2} ${tag2p}`;
     const sdinfotitle = `(${domain.replace('@.', '')}) #${id + 1}`;

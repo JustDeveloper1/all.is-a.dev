@@ -68,7 +68,7 @@ body, body * {
     background-color: #6e3bf3;
     background-clip: padding-box;
   }
-  #spotlight {
+  #spotlight:not(.thiswebsite) {
     filter: drop-shadow(0px 0px 6px #6e3bf377);
     -webkit-filter: drop-shadow(0px 0px 6px #6e3bf377);
     padding-top: 5px;
