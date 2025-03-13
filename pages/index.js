@@ -115,6 +115,7 @@ const Home = () => {
   const isOfficial = (domain) => {
     const offs = [
       '@.is-a.dev',
+      'all.is-a.dev',
       'data.is-a.dev',
       'docs.is-a.dev',
       'owl.is-a.dev',
