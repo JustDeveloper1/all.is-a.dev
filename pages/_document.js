@@ -61,6 +61,41 @@ class CustomDocument extends Document {
           <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
           <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
           <link rel="manifest" href="/site.webmanifest"></link>
+          <meta name="title" content="all.is-a.dev" />
+          <meta name="keywords" content="is-a-dev,all,is,a,dev,every,free,subdomain,domain" />
+          <meta name="description" content="a System Development Studio" />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="http://all.is-a.dev/" />
+          <meta property="og:title" content="all.is-a.dev" />
+          <meta property="og:description" content="Every subdomain on .is-a.dev" />
+          <meta
+            property="og:image"
+            content="https://img.juststudio.is-a.dev/a.png"
+          />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <meta charset="utf-8" />
+          <meta property="twitter:card" content="summary_large_image" />
+          <meta property="vk:image" content="https://img.juststudio.is-a.dev/b.png" />
+          <div dangerouslySetInnerHTML={{__html:`<script type='application/ld+json'>
+            {
+              "@context": "http://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                "@type": "ListItem",
+                "position": "1",
+                "name": "is-a.dev",
+                "item": "https://is-a.dev/"
+              },
+                {
+                "@type": "ListItem",
+                "position": "2",
+                "name": "all.is-a.dev",
+                "item": "https://all.is-a.dev/"
+              }
+              ]
+            }
+          </script>`}} />
         </Head>
         <body>
           <Main></Main>
