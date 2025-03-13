@@ -175,7 +175,7 @@ const Home = () => {
   useEffect(() => {    
     const fetchData = async () => {
       try {
-        const response = await fetch('https://raw-api.is-a.dev/');
+        const response = await fetch('https://raw.is-a.dev/');
         const data = await response.json();
         
         const processedItems = data.map((item, index) => {
