@@ -303,13 +303,6 @@ const Home = () => {
             translate.raw('desc'),
         }} />
       </div>
-      <div className="DISCLAIMER">
-        <h1 dangerouslySetInnerHTML={{
-          __html:
-            translate.raw('disc'),
-        }} />
-        <p>{translate.raw('dis1')} <strong style={{ textDecoration: 'underline', padding: '0px !important' }}>{translate.raw('dis2')}</strong> {translate.raw('dis3')} <a href="https://raw-api.is-a.dev/" target="_blank">raw-api.is-a.dev</a>.</p>
-      </div>
       <div className="i" dangerouslySetInnerHTML={{__html:translate.raw('data'),}} />
       {loading ? (
         <p dangerouslySetInnerHTML={{
