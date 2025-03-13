@@ -284,8 +284,8 @@ const Home = () => {
   return (
     <>
       <div class="c">
-        <a href="https://github.com/JustDeveloper1/all.is-a.dev" target="_blank" dangerouslySetInnerHTML={{__html: translate.raw('twos')}} />
-        <a href="https://github.com/JustDeveloper1/all.is-a.dev/blob/main/LICENSE" target="_blank">&copy; 2025 JustDeveloper</a>
+        <a href="https://github.com/is-a-dev/all.is-a.dev" target="_blank" dangerouslySetInnerHTML={{__html: translate.raw('twos')}} />
+        <a href="https://github.com/is-a-dev/all.is-a.dev/blob/main/LICENSE" target="_blank">&copy; 2025 JustDeveloper</a>
       </div>
       <div class="NOT-A DISCLAIMER THIS-IS-HEADER">
         <img alt="Domains Count" src="https://img.shields.io/github/directory-file-count/is-a-dev/register/domains?color=6e3bf3&amp;label=domains&amp;style=for-the-badge" width="106" height="31" />
