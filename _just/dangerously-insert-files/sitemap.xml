@@ -27,5 +27,8 @@ SOFTWARE.
 <url>
 <loc>https://all.is-a.dev/</loc>
 <priority>1.00</priority>
+</url><url>
+<loc>https://all.is-a.dev/ru</loc>
+<priority>0.90</priority>
 </url>
 </urlset>
