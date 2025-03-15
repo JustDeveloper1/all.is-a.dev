@@ -26,6 +26,7 @@ User-agent: *
 Allow: /
 Disallow: /_next*
 Disallow: /_just*
+Disallow: /api*
 Disallow: /CNAME
 Disallow: /LICENSE
 Disallow: /README.md
