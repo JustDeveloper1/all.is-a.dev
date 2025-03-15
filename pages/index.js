@@ -397,6 +397,10 @@ const Home = () => {
           </ul>
         </>
       )}
+      <div dangerouslySetInnerHTML={{
+        __html:
+          `<noscript><style>.c{z-index:2 !important;}</style><div class="e" all_is-a_dev___data="error0"><p>${translate.raw('nojs')}</p><a href="/" target="_self">${translate.raw('ret2')}</a></div></noscript>`
+      }} />
     </>
   );
 };

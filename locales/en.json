@@ -29,6 +29,8 @@
   "ongh": "on GitHub",
   "eftf": "Error: Failed to fetch.",
   "retr": "Retry",
-  "apis": "APIs"
+  "apis": "APIs",
+  "nojs": "Please enable JavaScript in your browser settings.",
+  "ret2": "I have enabled JavaScript"
 
 }
