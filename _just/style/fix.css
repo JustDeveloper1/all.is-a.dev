@@ -41,3 +41,10 @@ p {
 .DISCLAIMER p {
     font-size: 14px;
 }
+.e p, .e a {
+    max-width: 80%;
+    text-align: center;
+}
+.NOT-A {
+    border-bottom-right-radius: 20px !important;
+}
