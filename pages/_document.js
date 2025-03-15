@@ -24,9 +24,11 @@ SOFTWARE.
 
 */
 
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { useTranslations } from 'next-intl';
 class CustomDocument extends Document {
   render() {
+    const translate = useTranslations();
     return (
       <Html>
         <Head>
@@ -62,12 +64,12 @@ class CustomDocument extends Document {
           <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
           <link rel="manifest" href="/site.webmanifest"></link>
           <meta name="title" content="all.is-a.dev" />
-          <meta name="keywords" content="is-a-dev,all,is,a,dev,every,free,subdomain,domain" />
-          <meta name="description" content="a System Development Studio" />
+          <meta name="keywords" content={translate.raw('meta')} />
+          <meta name="description" content={translate.raw('desc')} />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="http://all.is-a.dev/" />
           <meta property="og:title" content="all.is-a.dev" />
-          <meta property="og:description" content="Every subdomain on .is-a.dev" />
+          <meta property="og:description" content={translate.raw('desc')} />
           <meta
             property="og:image"
             content="https://img.juststudio.is-a.dev/a.png"

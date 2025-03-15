@@ -36,8 +36,8 @@ const Home = () => {
   const router = useRouter();
 
   const err = {
-    "noOwner1": "unknown",
-    "noOwner2": "unknown",
+    "noOwner1": translate.raw('eno1'),
+    "noOwner2": translate.raw('eno2'),
   }
 
   // list of websites that you should look at
@@ -191,7 +191,7 @@ const Home = () => {
         setListItems(processedItems);
         setLoading(false);
       } catch (error) {
-        console.error(`Error fetching data: ${error}`);
+        console.error(`Error fetching subdomains data: ${error}`);
         setTimeout(() => window.location.reload, 100);
         setLoading(false);
         setFailed(true);
@@ -288,7 +288,7 @@ const Home = () => {
         <a href="https://github.com/is-a-dev/all.is-a.dev/blob/main/LICENSE" target="_blank">&copy; 2025 JustDeveloper</a>
       </div>
       <div class="NOT-A DISCLAIMER THIS-IS-HEADER">
-        <img alt="Domains Count" src="https://img.shields.io/github/directory-file-count/is-a-dev/register/domains?color=6e3bf3&amp;label=domains&amp;style=for-the-badge" width="106" height="31" />
+        <img alt={translate.raw('dcia')} src="https://img.shields.io/github/directory-file-count/is-a-dev/register/domains?color=6e3bf3&amp;label=domains&amp;style=for-the-badge" width="106" height="31" />
         <h1>
           ------------
         </h1>
@@ -322,7 +322,7 @@ const Home = () => {
         </div>
       ) : (
         <>
-          <p>{translate.raw('offs')} <small>({translate.raw('offi')}<a href="https://docs.is-a.dev/" target="_blank" title="is-a.dev documentation">https://docs.is-a.dev/</a>)</small></p>
+          <p>{translate.raw('offs')} <small>({translate.raw('offi')}<a href="https://docs.is-a.dev/" target="_blank" title={translate.raw('docs')}>https://docs.is-a.dev/</a>)</small></p>
           <ul
             onClick={clickEvent}
           >
