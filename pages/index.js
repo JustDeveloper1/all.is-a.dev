@@ -35,6 +35,16 @@ const Home = () => {
   const translate = useTranslations();
   const router = useRouter();
 
+  var aprilFools = {
+    month: 3,
+    date: 1
+  }
+  
+  function isItAprilFoolDay() {
+    var now = new Date();
+    return (now.getMonth() == aprilFools.month && now.getDate() == aprilFools.date);
+  }
+
   const err = {
     "noOwner1": translate.raw('eno1'),
     "noOwner2": translate.raw('eno2'),
@@ -202,7 +212,7 @@ const Home = () => {
   }, []);
 
   const by = translate.raw('bbyy');
-  const og = translate.raw('ongh');
+  const og = isItAprilFoolDay() ? translate.raw('af07') : translate.raw('ongh');
   const currentLocation = router.pathname || '/';
 
   const subdomain = (item, listId) => {
@@ -223,7 +233,7 @@ const Home = () => {
     let ptag2 = 'div';
     let tag2p = `class="subdomain-link" id="subdomain-${id}" title="${description}" domain="${domain}"`;
     const isOff = isOfficial(domain);
-    if (spotlight) {tag1 = 'span id="spotlight"'} else if (superspotlight) {tag1 = 'span id="spotlight" class="superspotlight"'}
+    if (spotlight) {tag1 = 'span id="spotlight"'} else if (superspotlight || isItAprilFoolDay()) {tag1 = 'span id="spotlight" class="superspotlight"'}
     if (isOff) {
       ptag2 = 'a';
       tag2p = `class="subdomain-link" target="_blank" title="${description}" href="${link.replace('@.', '')}"`;
@@ -281,6 +291,15 @@ const Home = () => {
     if (target && target.getAttribute('domain')) handleClick(target);
   }
 
+  const descvar = isItAprilFoolDay() ? 'af02' : 'desc';
+  const eftfvar = isItAprilFoolDay() ? 'af08' : 'eftf';
+  const retrvar = isItAprilFoolDay() ? 'af09' : 'retr';
+  const offsvar = isItAprilFoolDay() ? 'af03' : 'offs';
+  const offivar = isItAprilFoolDay() ? 'af04' : 'offi';
+  const subdvar = isItAprilFoolDay() ? 'af05' : 'subd';
+  const apisvar = isItAprilFoolDay() ? 'af06' : 'apis';
+  const sysdvar = isItAprilFoolDay() ? 'af10' : 'sysd';
+
   return (
     <>
       <div class="c">
@@ -292,15 +311,17 @@ const Home = () => {
         <h1>
           ------------
         </h1>
-        <h1>
-          all.is-a.dev
-        </h1>
+        {isItAprilFoolDay() ? (
+          <h1 dangerouslySetInnerHTML={{__html: translate.raw('af01')}} />
+        ) : <h1>
+        all.is-a.dev
+        </h1>}
         <h1>
           ------------
         </h1>
         <p dangerouslySetInnerHTML={{
           __html:
-            translate.raw('desc'),
+            translate.raw(descvar),
         }} />
       </div>
       <div className="i" dangerouslySetInnerHTML={{__html:translate.raw('data'),}} />
@@ -313,16 +334,16 @@ const Home = () => {
         <div class="e" all_is-a_dev___data="error">
           <p dangerouslySetInnerHTML={{
             __html:
-              translate.raw('eftf')
+              translate.raw(eftfvar)
           }} />
           <a href={currentLocation} target="_self" dangerouslySetInnerHTML={{
             __html:
-              translate.raw('retr')
+              translate.raw(retrvar)
           }} />
         </div>
       ) : (
         <>
-          <p>{translate.raw('offs')} <small>({translate.raw('offi')}<a href="https://docs.is-a.dev/" target="_blank" title={translate.raw('docs')}>https://docs.is-a.dev/</a>)</small></p>
+          <p>{translate.raw(offsvar)} <small>({translate.raw(offivar)}<a href="https://docs.is-a.dev/" target="_blank" title={translate.raw('docs')}>https://docs.is-a.dev/</a>)</small></p>
           <ul
             onClick={clickEvent}
           >
@@ -340,7 +361,7 @@ const Home = () => {
           </ul>
           <p dangerouslySetInnerHTML={{
               __html:
-                translate.raw('subd'),
+                translate.raw(subdvar),
             }} />
           <ul
             onClick={clickEvent}
@@ -359,7 +380,7 @@ const Home = () => {
           </ul>
           <p dangerouslySetInnerHTML={{
               __html:
-                translate.raw('apis'),
+                translate.raw(apisvar),
             }} />
           <ul
             onClick={clickEvent}
@@ -378,7 +399,7 @@ const Home = () => {
           </ul>
           <p dangerouslySetInnerHTML={{
               __html:
-                translate.raw('sysd'),
+                translate.raw(sysdvar),
             }} />
           <ul
             onClick={clickEvent}
