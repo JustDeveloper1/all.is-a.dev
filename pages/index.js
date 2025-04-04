@@ -129,8 +129,7 @@ const Home = () => {
       'data.is-a.dev',
       'docs.is-a.dev',
       'owl.is-a.dev',
-      'raw-api.is-a.dev',
-      'register-bot.is-a.dev',
+      'raw.is-a.dev',
       'team.is-a.dev',
       'www.is-a.dev'
     ];
