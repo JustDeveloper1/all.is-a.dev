@@ -185,7 +185,7 @@ const Home = () => {
   useEffect(() => {    
     const fetchData = async () => {
       try {
-        const response = await fetch('https://raw.is-a.dev/');
+        const response = await fetch('https://raw.is-a.dev/v2.json');
         const data = (await response.json()).filter(d => !d.reserved);
         
         const processedItems = data.map((item, index) => {
