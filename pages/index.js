@@ -128,10 +128,8 @@ const Home = () => {
       'all.is-a.dev',
       'data.is-a.dev',
       'docs.is-a.dev',
-      'owl.is-a.dev',
+      'factory.is-a.dev',
       'raw.is-a.dev',
-      'team.is-a.dev',
-      'www.is-a.dev'
     ];
     return (offs.some(off => off === domain));
   };
