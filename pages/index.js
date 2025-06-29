@@ -59,20 +59,19 @@ const Home = () => {
 
   // list of the best websites
   const superspotlight = [
-    "heatblock.esb.is-a.dev"
+    "heatblock.is-a.dev" // heatblock.esb.is-a.dev moved to heatblock.is-a.dev
     // to be superspotlighted...
   ]
 
   const specials = [
-    {
+    /*{
       "d": "hate.is-a.dev",
       "c": "#e2155b"
-    }
+    }*/ // removed from list because hate.is-a.dev (by DevMatei) got removed
   ]
 
   const js_subdomains = [
     "juststudio.is-a.dev",
-    "justdeveloper.is-a.dev",
     "encoder.js.is-a.dev",
     "all.is-a.dev"
   ];
@@ -98,7 +97,7 @@ const Home = () => {
     "william.is-a.dev",
 
     // 21Z
-    // "21z.is-a.dev" // Removed from list because 21Z dont use it (there is no website on 21z.is-a.dev).
+    // "21z.is-a.dev", // Removed from list because 21Z dont use it (there is no website on 21z.is-a.dev).
 
   ];
   const helpers = [
@@ -106,8 +105,11 @@ const Home = () => {
     // DevMatei
     "devmatei.is-a.dev",
 
+    // JustDeveloper
+    "justdeveloper.is-a.dev",
+
     // MaskDuck , where my degen role that you gived me long time ago when you were maintainer????????????????????????????????????????????
-    // "maskduck.is-a.dev" // Removed from list because MaskDuck is not a helper anymore (press f to pay respect)
+    // "maskduck.is-a.dev", // Removed from list because MaskDuck is not a helper anymore (press f to pay respect)
 
   ]
 
@@ -149,6 +151,8 @@ const Home = () => {
       'analytics.',
       'api.',
       'playeranalytics.',
+      'raw-api.',
+      'raw.',
       'server.',
       'tunnel.',
     ]
