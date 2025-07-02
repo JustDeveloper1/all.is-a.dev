@@ -62,7 +62,7 @@ jobs:
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Override with _just
-        uses: js-just/_just@v0.0.28
+        uses: js-just/_just@ccca04e44ee35634e9c3fd1b3a31add2f799f717
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
