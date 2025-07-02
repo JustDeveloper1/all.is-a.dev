@@ -72,6 +72,7 @@ const Home = () => {
 
   const js_subdomains = [
     "juststudio.is-a.dev",
+    "justdeveloper.is-a.dev",
     "encoder.js.is-a.dev",
     "all.is-a.dev"
   ];
@@ -97,10 +98,10 @@ const Home = () => {
     "william.is-a.dev",
 
     // 21Z
-    // "21z.is-a.dev", // Removed from list because 21Z dont use it (there is no website on 21z.is-a.dev).
+    // "21z.is-a.dev" // Removed from list because 21Z dont use it (there is no website on 21z.is-a.dev).
 
   ];
-  const helpers = [
+  const helpers = [/*
 
     // DevMatei
     "devmatei.is-a.dev",
@@ -108,10 +109,7 @@ const Home = () => {
     // JustDeveloper
     "justdeveloper.is-a.dev",
 
-    // MaskDuck , where my degen role that you gived me long time ago when you were maintainer????????????????????????????????????????????
-    // "maskduck.is-a.dev", // Removed from list because MaskDuck is not a helper anymore (press f to pay respect)
-
-  ]
+  */] // helpers list wont be updated
 
   const truncateString = (str, num) => {
     return str.length > num ? str.slice(0, num) : str;
