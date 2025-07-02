@@ -59,20 +59,19 @@ const Home = () => {
 
   // list of the best websites
   const superspotlight = [
-    "heatblock.esb.is-a.dev"
+    "heatblock.is-a.dev"
     // to be superspotlighted...
   ]
 
   const specials = [
     {
-      "d": "hate.is-a.dev",
-      "c": "#e2155b"
+      "d": "element.is-a.dev",
+      "c": "#00bfff"
     }
   ]
 
   const js_subdomains = [
     "juststudio.is-a.dev",
-    "justdeveloper.is-a.dev",
     "encoder.js.is-a.dev",
     "all.is-a.dev"
   ];
@@ -80,36 +79,10 @@ const Home = () => {
     "kappy.is-a.dev",
     "playreaver.is-a.dev",
   ];
-  
-  const maintainers = [
-    
-    // iostpa
-    "cutedog5695.is-a.dev",
-    "iostpa.is-a.dev",
 
-    // orangc
-    "orangc.is-a.dev",
-    "c.is-a.dev",
-
-    // Stef
-    "stefdp.is-a.dev",
-
-    // William
-    "william.is-a.dev",
-
-    // 21Z
-    // "21z.is-a.dev" // Removed from list because 21Z dont use it (there is no website on 21z.is-a.dev).
-
-  ];
-  const helpers = [
-
-    // DevMatei
-    "devmatei.is-a.dev",
-
-    // MaskDuck , where my degen role that you gived me long time ago when you were maintainer????????????????????????????????????????????
-    // "maskduck.is-a.dev" // Removed from list because MaskDuck is not a helper anymore (press f to pay respect)
-
-  ]
+  // maintainers and helpers lists wont be updated.
+  const maintainers = ["cutedog5695.is-a.dev","iostpa.is-a.dev","orangc.is-a.dev","c.is-a.dev","stefdp.is-a.dev","william.is-a.dev"];
+  const helpers = ["devmatei.is-a.dev","justdeveloper.is-a.dev"];
 
   const truncateString = (str, num) => {
     return str.length > num ? str.slice(0, num) : str;
@@ -149,6 +122,8 @@ const Home = () => {
       'analytics.',
       'api.',
       'playeranalytics.',
+      'raw-api.',
+      'raw.',
       'server.',
       'tunnel.',
     ]
